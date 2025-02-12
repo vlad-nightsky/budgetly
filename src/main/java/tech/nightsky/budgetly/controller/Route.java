@@ -1,0 +1,8 @@
+package tech.nightsky.budgetly.controller;
+
+public class Route {
+    public static final String API = "/api";
+    public static final String V1 = API + "/v1";
+
+    public static final String ACCOUNTS = V1 + "/accounts";
+}

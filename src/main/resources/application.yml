@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: budgetly
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  flyway:
+    locations: classpath:/db/migration
+    schemas: budgyscheme
+    baselineOnMigrate: true
+    enabled: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/budged?currentSchema=budgyscheme
+    username: budgybot
+    password: catradora
