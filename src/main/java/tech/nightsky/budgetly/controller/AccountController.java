@@ -25,15 +25,20 @@ public class AccountController {
     //todo вынести в route
     @GetMapping("/{id}")
     public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(service.getAccountById(id));
+        //todo возвращать полноценную ошибку
+        return ResponseEntity.ok().body(
+                service.getAccountById(id).orElse(null)
+        );
     }
 
+    //todo использовать вместо сущности dto
     //Добавить документацию
     @PostMapping("/")
     public ResponseEntity<Account> saveAccount(@RequestBody Account employee) {
         return ResponseEntity.ok().body(service.saveAccount(employee));
     }
 
+    //todo добавить корректную систему обновления
     @PutMapping("/")
     public ResponseEntity<Account> updateAccount(@RequestBody Account employee) {
         return ResponseEntity.ok().body(service.updateAccount(employee));

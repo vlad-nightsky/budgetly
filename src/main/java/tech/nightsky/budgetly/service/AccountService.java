@@ -26,13 +26,8 @@ public class AccountService {
         return repository.findAll();
     }
 
-    public Account getAccountById(Long id) {
-        Optional<Account> optionalAccount = repository.findById(id);
-        if (optionalAccount.isPresent()) {
-            return optionalAccount.get();
-        }
-        log.info("Пользователь с идентификатором: {} не существует", id);
-        return null;
+    public Optional<Account> getAccountById(Long id) {
+        return repository.findById(id);
     }
 
     //todo добавить документацию

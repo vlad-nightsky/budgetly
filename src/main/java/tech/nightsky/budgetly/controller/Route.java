@@ -5,4 +5,5 @@ public class Route {
     public static final String V1 = API + "/v1";
 
     public static final String ACCOUNTS = V1 + "/accounts";
+    public static final String CATEGORIES = V1 + "/categories";
 }
