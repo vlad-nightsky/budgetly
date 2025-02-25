@@ -18,13 +18,12 @@ public class CategoryController {
 
     private final CategoryService service;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<Category>> getAllCategories() {
         return ResponseEntity.ok().body(service.getAllCategories());
     }
 
-    //todo вынести в route
-    @GetMapping("/{id}")
+    @GetMapping(Route.ID)
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
         //todo возвращать полноценную ошибку
         return ResponseEntity.ok().body(
@@ -33,18 +32,18 @@ public class CategoryController {
     }
 
     //todo Добавить документацию
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<Category> saveCategory(@RequestBody CategoryDto categoryDto) {
         return ResponseEntity.ok().body(service.saveCategory(categoryDto));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(Route.ID)
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDto) {
         return ResponseEntity.ok().body(service.updateCategory(id, categoryDto));
     }
 
     //todo сделать единую систему ответа
-    @DeleteMapping("/{id}")
+    @DeleteMapping(Route.ID)
     public ResponseEntity<String> deleteCategoryById(@PathVariable Long id) {
         service.deleteCategoryById(id);
         return ResponseEntity.ok().body("Категория удалёна успешно");

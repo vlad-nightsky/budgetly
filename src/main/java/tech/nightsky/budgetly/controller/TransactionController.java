@@ -19,13 +19,12 @@ public class TransactionController {
 
     private final TransactionService service;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<Transaction>> getAllTransactions() {
         return ResponseEntity.ok().body(service.getAllTransactions());
     }
 
-    //todo вынести в route
-    @GetMapping("/{id}")
+    @GetMapping(Route.ID)
     public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id) {
         //todo возвращать полноценную ошибку
         return ResponseEntity.ok().body(
@@ -34,18 +33,18 @@ public class TransactionController {
     }
 
     //todo Добавить документацию
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<Transaction> saveTransaction(@RequestBody TransactionDto transactionDto) {
         return ResponseEntity.ok().body(service.saveTransaction(transactionDto));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(Route.ID)
     public ResponseEntity<Transaction> updateTransaction(@PathVariable Long id, @RequestBody TransactionDto transactionDto) {
         return ResponseEntity.ok().body(service.updateTransaction(id, transactionDto));
     }
 
     //todo сделать единую систему ответа
-    @DeleteMapping("/{id}")
+    @DeleteMapping(Route.ID)
     public ResponseEntity<String> deleteTransactionById(@PathVariable Long id) {
         service.deleteTransactionById(id);
         return ResponseEntity.ok().body("Транзакция удалёна успешно");
