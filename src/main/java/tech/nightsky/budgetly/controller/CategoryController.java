@@ -26,10 +26,13 @@ public class CategoryController {
     //todo вынести в route
     @GetMapping("/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
-        return ResponseEntity.ok().body(service.getCategoryById(id));
+        //todo возвращать полноценную ошибку
+        return ResponseEntity.ok().body(
+                service.getCategoryById(id).orElse(null)
+        );
     }
 
-    //Добавить документацию
+    //todo Добавить документацию
     @PostMapping("/")
     public ResponseEntity<Category> saveCategory(@RequestBody CategoryDto categoryDto) {
         return ResponseEntity.ok().body(service.saveCategory(categoryDto));

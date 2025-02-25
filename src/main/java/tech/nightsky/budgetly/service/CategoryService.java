@@ -28,13 +28,8 @@ public class CategoryService {
         return repository.findAll();
     }
 
-    public Category getCategoryById(Long id) {
-        Optional<Category> optionalCategory = repository.findById(id);
-        if (optionalCategory.isPresent()) {
-            return optionalCategory.get();
-        }
-        log.info("Категория с идентификатором: {} не существует", id);
-        return null;
+    public Optional<Category> getCategoryById(Long id) {
+        return repository.findById(id);
     }
 
     public Category saveCategory(CategoryDto categoryDto) {

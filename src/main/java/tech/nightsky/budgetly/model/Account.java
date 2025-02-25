@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
 
 /**
- * Пользователь системы
+ * Аккаунт пользователь системы
  */
 @Getter
 @Setter
