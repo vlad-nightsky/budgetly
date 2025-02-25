@@ -2,9 +2,9 @@ package tech.nightsky.budgetly.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.stereotype.Service;
-import tech.nightsky.budgetly.dto.CategoryDto;
-import tech.nightsky.budgetly.model.Account;
+import tech.nightsky.budgetly.dto.request.CategoryRequest;
 import tech.nightsky.budgetly.model.Category;
 import tech.nightsky.budgetly.repository.CategoryRepository;
 
@@ -32,37 +32,37 @@ public class CategoryService {
         return repository.findById(id);
     }
 
-    public Category saveCategory(CategoryDto categoryDto) {
-        Account account = accountService.getAccountById(categoryDto.accountId())
+    public Category saveCategory(CategoryRequest request) {
+        val account = accountService.getAccountById(request.accountId())
                 //todo корректная система ошибок
                 .orElseThrow(() -> new IllegalArgumentException("Account no found"));
 
-        Category newCategory = Category.builder()
+        val newCategory = Category.builder()
                 .account(account)
-                .name(categoryDto.name())
+                .name(request.name())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
 
-        Category savedCategory = repository.save(newCategory);
+        val savedCategory = repository.save(newCategory);
 
         log.info("Категория с идентификатором: {} сохранён успешно", newCategory.getId());
         return savedCategory;
     }
 
-    public Category updateCategory(Long categoryId, CategoryDto categoryDto) {
-        Category existingCategory = repository.findById(categoryId)
+    public Category updateCategory(Long id, CategoryRequest request) {
+        val existingCategory = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Category no found"));
 
         existingCategory.setUpdatedAt(LocalDateTime.now());
-        existingCategory.setName(categoryDto.name());
+        existingCategory.setName(request.name());
 
-        Account account = accountService.getAccountById(categoryDto.accountId())
+        val account = accountService.getAccountById(request.accountId())
                 //todo корректная система ошибок
                 .orElseThrow(() -> new IllegalArgumentException("Account no found"));
         existingCategory.setAccount(account);
 
-        Category updatedCategory = repository.save(existingCategory);
+        val updatedCategory = repository.save(existingCategory);
 
         log.info("Категория с идентификатором: {} обновлён успешно", updatedCategory.getId());
         return updatedCategory;

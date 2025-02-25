@@ -3,7 +3,8 @@ package tech.nightsky.budgetly.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import tech.nightsky.budgetly.dto.TransactionDto;
+import tech.nightsky.budgetly.dto.request.TransactionRequest;
+import tech.nightsky.budgetly.exception.NotFoundException;
 import tech.nightsky.budgetly.model.Account;
 import tech.nightsky.budgetly.model.Category;
 import tech.nightsky.budgetly.model.Transaction;
@@ -34,7 +35,7 @@ public class TransactionService {
         return repository.findById(id);
     }
 
-    public Transaction saveTransaction(TransactionDto transactionDto) {
+    public Transaction saveTransaction(TransactionRequest transactionDto) {
         //todo сделать final
         Account account = accountService.getAccountById(transactionDto.accountId())
                 //todo корректная система ошибок
@@ -60,24 +61,23 @@ public class TransactionService {
         return savedTransaction;
     }
 
-    public Transaction updateTransaction(Long transactionId, TransactionDto transactionDto) {
-        Transaction existingTransaction = repository.findById(transactionId)
+    public Transaction updateTransaction(Long id, TransactionRequest request) {
+        Transaction existingTransaction = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Transaction no found"));
 
         existingTransaction.setUpdatedAt(LocalDateTime.now());
 
-
-        Account account = accountService.getAccountById(transactionDto.accountId())
+        Account account = accountService.getAccountById(request.accountId())
                 //todo корректная система ошибок
-                .orElseThrow(() -> new IllegalArgumentException("Account no found"));
+                .orElseThrow(() -> NotFoundException.of(request.accountId()));
 
-        Category category = categoryService.getCategoryById(transactionDto.categoryId())
+        Category category = categoryService.getCategoryById(request.categoryId())
                 //todo корректная система ошибок
-                .orElseThrow(() -> new IllegalArgumentException("Category no found"));
+                .orElseThrow(() -> NotFoundException.of(request.categoryId()));
 
-        existingTransaction.setDescription(transactionDto.description());
-        existingTransaction.setAmount(transactionDto.amount());
-        existingTransaction.setType(transactionDto.type());
+        existingTransaction.setDescription(request.description());
+        existingTransaction.setAmount(request.amount());
+        existingTransaction.setType(request.type());
         existingTransaction.setCategory(category);
         existingTransaction.setAccount(account);
 

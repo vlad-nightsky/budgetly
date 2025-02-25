@@ -2,7 +2,10 @@ package tech.nightsky.budgetly.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.stereotype.Service;
+import tech.nightsky.budgetly.dto.request.AccountRequest;
+import tech.nightsky.budgetly.exception.NotFoundException;
 import tech.nightsky.budgetly.model.Account;
 import tech.nightsky.budgetly.repository.AccountRepository;
 
@@ -32,23 +35,31 @@ public class AccountService {
 
     //todo добавить документацию
     //добавить хеширования пароля и простую авторизацию
-    public Account saveAccount(Account employee) {
-        employee.setCreatedAt(LocalDateTime.now());
-        employee.setUpdatedAt(LocalDateTime.now());
-        Account savedAccount = repository.save(employee);
+    public Account saveAccount(AccountRequest request) {
+        val account = Account.builder()
+                .username(request.username())
+                .password(request.password())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
 
-        log.info("Пользователь с идентификатором: {} сохранён успешно", employee.getId());
+        val savedAccount = repository.save(account);
+
+        log.info("Пользователь с идентификатором: {} сохранён успешно", account.getId());
         return savedAccount;
     }
 
-    public Account updateAccount(Account employee) {
-        Optional<Account> existingAccount = repository.findById(employee.getId());
-        employee.setCreatedAt(existingAccount.get().getCreatedAt());
-        employee.setUpdatedAt(LocalDateTime.now());
+    public Account updateAccount(Long id, AccountRequest request) {
+        val existingAccount = repository.findById(id)
+                .orElseThrow(() -> NotFoundException.of(id));
 
-        Account updatedAccount = repository.save(employee);
+        existingAccount.setUsername(request.username());
+        existingAccount.setPassword(request.password());
+        existingAccount.setUpdatedAt(LocalDateTime.now());
 
-        log.info("Пользователь с идентификатором: {} обновлён успешно", employee.getId());
+        val updatedAccount = repository.save(existingAccount);
+
+        log.info("Пользователь с идентификатором: {} обновлён успешно", existingAccount.getId());
         return updatedAccount;
     }
 
