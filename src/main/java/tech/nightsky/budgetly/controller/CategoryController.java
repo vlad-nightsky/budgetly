@@ -1,9 +1,11 @@
 package tech.nightsky.budgetly.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.nightsky.budgetly.dto.request.CategoryRequest;
 import tech.nightsky.budgetly.dto.response.CategoryResponse;
 import tech.nightsky.budgetly.exception.NotFoundException;
@@ -38,7 +40,19 @@ public class CategoryController {
     //todo Добавить документацию
     @PostMapping()
     public ResponseEntity<CategoryResponse> saveCategory(@RequestBody CategoryRequest request) {
-        return ResponseEntity.ok().body(mapper.map(service.saveCategory(request)));
+        val category = service.saveCategory(request);
+
+        val location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(Route.ID)
+                .buildAndExpand(category.getId())
+                .toUri();
+
+        val response = mapper.map(category);
+
+        return ResponseEntity
+                .created(location)
+                .body(response);
     }
 
     @PutMapping(Route.ID)

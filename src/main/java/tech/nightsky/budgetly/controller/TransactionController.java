@@ -1,9 +1,11 @@
 package tech.nightsky.budgetly.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.nightsky.budgetly.dto.request.TransactionRequest;
 import tech.nightsky.budgetly.dto.response.TransactionResponse;
 import tech.nightsky.budgetly.exception.NotFoundException;
@@ -38,8 +40,21 @@ public class TransactionController {
 
     //todo Добавить документацию
     @PostMapping()
-    public ResponseEntity<TransactionResponse> saveTransaction(@RequestBody TransactionRequest transactionDto) {
-        return ResponseEntity.ok().body(mapper.map(service.saveTransaction(transactionDto)));
+    public ResponseEntity<TransactionResponse> saveTransaction(@RequestBody TransactionRequest request) {
+
+        val transaction = service.saveTransaction(request);
+
+        val location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(Route.ID)
+                .buildAndExpand(transaction.getId())
+                .toUri();
+
+        val response = mapper.map(transaction);
+
+        return ResponseEntity
+                .created(location)
+                .body(response);
     }
 
     @PutMapping(Route.ID)
