@@ -7,6 +7,6 @@ public class NotFoundException extends RuntimeException {
     }
 
     public static NotFoundException of(Long id) {
-        return new NotFoundException("Сущность с идентификатором: " + id + " не найдена!");
+        return new NotFoundException(ErrorMessage.notFoundMessage(id));
     }
 }
