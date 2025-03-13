@@ -1,5 +1,6 @@
 package tech.nightsky.budgetly.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 
 import java.util.List;
@@ -23,9 +24,40 @@ import java.util.List;
  *
  * @param error   Общий тип ошибки (например, "ValidationError", "InternalServerError").
  * @param message Сообщение об ошибке, предназначенное для пользователя или разработчика.
- * @param code    Код ошибки (например, HTTP-статус или внутренний код ошибки).
+ * @param code    HTTP-статус ошибки.
  * @param details Список объектов {@link ErrorDetailResponse}, содержащих детализированную информацию об ошибке.
  */
 @Builder
-public record ErrorResponse(String error, String message, Integer code, List<ErrorDetailResponse> details) {
+@Schema(title = "Информация об ошибке", description = "Содержит информацию об ошибке.")
+public record ErrorResponse(
+        @Schema(
+                title = "Тип ошибки",
+                description = "Общий тип ошибки (например, \"ValidationError\", \"InternalServerError\", \"NotFound\").",
+                accessMode = Schema.AccessMode.READ_ONLY,
+                example = "ValidationError"
+        )
+        String error,
+
+        @Schema(
+                title = "Сообщение об ошибке",
+                description = "Сообщение об ошибке, предназначенное для пользователя или разработчика.",
+                accessMode = Schema.AccessMode.READ_ONLY,
+                example = "Invalid input data"
+        )
+        String message,
+
+        @Schema(
+                title = "Сообщение об ошибке",
+                description = "HTTP-статус ошибки",
+                accessMode = Schema.AccessMode.READ_ONLY,
+                example = "400"
+        )
+        Integer code,
+
+        @Schema(
+                title = "Детали ошибки",
+                description = "Список содержащий детализированную информацию об ошибке",
+                accessMode = Schema.AccessMode.READ_ONLY
+        )
+        List<ErrorDetailResponse> details) {
 };

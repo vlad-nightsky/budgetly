@@ -1,5 +1,6 @@
 package tech.nightsky.budgetly.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Collections;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
+    @Hidden
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException ex, WebRequest request) {

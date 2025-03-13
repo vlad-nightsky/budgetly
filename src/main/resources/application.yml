@@ -13,3 +13,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/budged?currentSchema=budgyscheme
     username: budgybot
     password: catradora
+
+springdoc:
+  swagger-ui:
+    path: /swagger
+  api-docs:
+    path: /open-api
