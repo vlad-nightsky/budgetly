@@ -2,6 +2,7 @@ package tech.nightsky.budgetly.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
+import tech.nightsky.budgetly.doc.Docs;
 
 import java.util.List;
 
@@ -31,33 +32,33 @@ import java.util.List;
 @Schema(title = "Информация об ошибке", description = "Содержит информацию об ошибке.")
 public record ErrorResponse(
         @Schema(
-                title = "Тип ошибки",
-                description = "Общий тип ошибки (например, \"ValidationError\", \"InternalServerError\", \"NotFound\").",
+                title = Docs.ErrorResponse.ERROR_TITLE,
+                description = Docs.ErrorResponse.ERROR_DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "ValidationError"
+                example = Docs.ErrorResponse.ERROR_EXAMPLE
         )
         String error,
 
         @Schema(
-                title = "Сообщение об ошибке",
-                description = "Сообщение об ошибке, предназначенное для пользователя или разработчика.",
+                title = Docs.ErrorResponse.MESSAGE_TITLE,
+                description = Docs.ErrorResponse.MESSAGE_DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "Invalid input data"
+                example = Docs.ErrorResponse.MESSAGE_EXAMPLE
         )
         String message,
 
         @Schema(
-                title = "Сообщение об ошибке",
-                description = "HTTP-статус ошибки",
+                title = Docs.ErrorResponse.CODE_TITLE,
+                description = Docs.ErrorResponse.CODE_DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "400"
+                example = Docs.ErrorResponse.CODE_EXAMPLE
         )
         Integer code,
 
         @Schema(
-                title = "Детали ошибки",
-                description = "Список содержащий детализированную информацию об ошибке",
+                title = Docs.ErrorResponse.DETAILS_TITLE,
+                description = Docs.ErrorResponse.DETAILS_DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY
         )
         List<ErrorDetailResponse> details) {
-};
+}

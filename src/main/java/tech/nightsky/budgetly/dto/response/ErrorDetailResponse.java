@@ -1,6 +1,7 @@
 package tech.nightsky.budgetly.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import tech.nightsky.budgetly.doc.Docs;
 
 /**
  * Класс ErrorDetailResponse представляет детализированную информацию об ошибке.
@@ -9,21 +10,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @param field   Название поля, связанного с ошибкой (например, "email", "password").
  * @param message Сообщение об ошибке для конкретного поля.
  */
-@Schema(title = "Детализированная информация об ошибке", description = "Представляет детализированную информацию об ошибке. Используется для указания конкретных полей и сообщений об ошибках.")
+@Schema(
+        title = Docs.ErrorDetailResponse.TITLE,
+        description = Docs.ErrorDetailResponse.DESCRIPTION
+)
 public record ErrorDetailResponse(
         @Schema(
-                title = "Название поля",
-                description = "Название поля, связанного с ошибкой (например, \"email\", \"password\").",
+                title = Docs.ErrorDetailResponse.Field.TITLE,
+                description = Docs.ErrorDetailResponse.Field.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "email"
+                example = Docs.ErrorDetailResponse.Field.EXAMPLE
         )
         String field,
 
         @Schema(
-                title = "Название поля",
-                description = "Сообщение об ошибке для конкретного поля. Сообщение поможет понять как правильно лидировать данные.",
+                title = Docs.ErrorDetailResponse.Message.TITLE,
+                description = Docs.ErrorDetailResponse.Message.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "Email must be a valid format"
+                example = Docs.ErrorDetailResponse.Message.EXAMPLE
         )
-        String message) {
+        String message
+) {
 }

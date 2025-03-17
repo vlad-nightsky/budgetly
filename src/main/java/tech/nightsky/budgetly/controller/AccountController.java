@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import tech.nightsky.budgetly.doc.Docs;
 import tech.nightsky.budgetly.dto.request.AccountRequest;
 import tech.nightsky.budgetly.dto.response.AccountResponse;
 import tech.nightsky.budgetly.dto.response.ErrorResponse;
@@ -27,23 +28,23 @@ import java.util.List;
 @RestController
 @RequestMapping(Route.ACCOUNTS)
 @RequiredArgsConstructor
-@Tag(name = "Управление аккаунтами", description = "Операции по управлению аккаунтами пользователя")
+@Tag(name = Docs.AccountController.NAME, description = Docs.AccountController.DESCRIPTION)
 public class AccountController {
 
     private final AccountService service;
     private final ResponseMapper mapper;
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Список аккаунтов пользователей", description = "Возвращает список аккаунтов пользователей")
-    @ApiResponse(responseCode = "200", description = "Получен список аккаунтов пользователей")
+    @Operation(summary = Docs.AccountController.GetAll.SUMMARY, description = Docs.AccountController.GetAll.DESCRIPTION)
+    @ApiResponse(responseCode = "200", description = Docs.AccountController.GetAll.MESSAGE)
     public ResponseEntity<List<AccountResponse>> getAllAccounts() {
         return ResponseEntity.ok().body(service.getAllAccounts().stream().map(mapper::map).toList());
     }
 
-    @Operation(summary = "Информация о аккаунте", description = "Запрос на получение информации о аккаунте пользователя.")
-    @ApiResponse(responseCode = "200", description = "Аккаунт найден",
+    @Operation(summary = Docs.AccountController.GetById.SUMMARY, description = Docs.AccountController.GetById.DESCRIPTION)
+    @ApiResponse(responseCode = "200", description = Docs.AccountController.GetById.SUCCESS_MESSAGE,
             content = @Content(schema = @Schema(implementation = AccountResponse.class)))
-    @ApiResponse(responseCode = "404", description = "Аккаунт не найден",
+    @ApiResponse(responseCode = "404", description = Docs.AccountController.GetById.NOT_FOUND_MESSAGE,
             content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     @GetMapping(path = Route.ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountResponse> getAccountById(@Parameter(ref = "#/components/parameters/PathId") @PathVariable Long id) {
@@ -53,10 +54,9 @@ public class AccountController {
         );
     }
 
-    //todo Добавить документацию
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Создание аккаунта", description = "Запрос на создание аккаунта пользователя. В случае успеха вернёт данные по аккаунту.")
-    @ApiResponse(responseCode = "201", description = "Аккаунт успешно создан",
+    @Operation(summary = Docs.AccountController.Save.SUMMARY, description = Docs.AccountController.Save.DESCRIPTION)
+    @ApiResponse(responseCode = "201", description = Docs.AccountController.Save.SUCCESS_MESSAGE,
             headers = {@Header(name = "Location", ref = "#/components/headers/Location")})
     public ResponseEntity<AccountResponse> saveAccount(@RequestBody AccountRequest request) {
         val account = service.saveAccount(request);
@@ -74,10 +74,9 @@ public class AccountController {
                 .body(response);
     }
 
-    @Operation(summary = "Обновление аккаунта", description = "Запрос на обновление аккаунта пользователя. В случае успеха вернёт данные по аккаунту.")
-    @ApiResponse(responseCode = "200", description = "Аккаунт успешно создан",
-            content = @Content(schema = @Schema(implementation = AccountResponse.class))
-    )
+    @Operation(summary = Docs.AccountController.Update.SUMMARY, description = Docs.AccountController.Update.DESCRIPTION)
+    @ApiResponse(responseCode = "200", description = Docs.AccountController.Update.SUCCESS_MESSAGE,
+            content = @Content(schema = @Schema(implementation = AccountResponse.class)))
     @PutMapping(path = Route.ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountResponse> updateAccount(@Parameter(ref = "#/components/parameters/PathId") @PathVariable Long id, @RequestBody AccountRequest request) {
         return ResponseEntity.ok().body(
@@ -85,8 +84,8 @@ public class AccountController {
     }
 
     @DeleteMapping(path = Route.ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Удаление аккаунта", description = "Запрос на удаление аккаунта пользователя. Аккаунт удаляется безвозвратно, восстановить его нельзя.")
-    @ApiResponse(responseCode = "204", description = "Аккаунт успешно удалён. Нечего возвращать.")
+    @Operation(summary = Docs.AccountController.Delete.SUMMARY, description = Docs.AccountController.Delete.DESCRIPTION)
+    @ApiResponse(responseCode = "204", description = Docs.AccountController.Delete.SUCCESS_MESSAGE)
     public ResponseEntity<Void> deleteAccountById(@Parameter(ref = "#/components/parameters/PathId") @PathVariable Long id) {
         service.deleteAccountById(id);
         return ResponseEntity.noContent().build();

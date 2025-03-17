@@ -1,42 +1,45 @@
 package tech.nightsky.budgetly.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import tech.nightsky.budgetly.doc.Docs;
 
 import java.time.LocalDateTime;
 
-
-@Schema(title = "Аккаунт", description = "Содержит информацию об аккаунте пользователя.")
+@Schema(
+        title = Docs.AccountResponse.TITLE,
+        description = Docs.AccountResponse.DESCRIPTION
+)
 public record AccountResponse(
         @Schema(
-                title = "Идентификатор",
-                description = "Указатель на аккаунт пользователя. Генерируется на стороне сервера.",
+                title = Docs.AccountResponse.Id.TITLE,
+                description = Docs.AccountResponse.Id.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "1"
+                example = Docs.AccountResponse.Id.EXAMPLE
         )
         Long id,
 
         @Schema(
-                title = "Имя пользователя",
-                description = "Имя пользователя. Используется для авторизации.",
+                title = Docs.AccountResponse.Username.TITLE,
+                description = Docs.AccountResponse.Username.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_WRITE,
-                example = "catra"
+                example = Docs.AccountResponse.Username.EXAMPLE
         )
         String username,
 
         @Schema(
-                title = "Дата создания",
-                description = "Дата и время создания объекта.",
+                title = Docs.AccountResponse.CreatedAt.TITLE,
+                description = Docs.AccountResponse.CreatedAt.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "2025-03-01T08:40:34.081287"
+                example = Docs.AccountResponse.CreatedAt.EXAMPLE
         )
         LocalDateTime createdAt,
 
-
         @Schema(
-                title = "Идентификатор",
-                description = "Дата и время обновления объекта.",
+                title = Docs.AccountResponse.UpdatedAt.TITLE,
+                description = Docs.AccountResponse.UpdatedAt.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY,
-                example = "2025-03-01T08:40:34.081287"
+                example = Docs.AccountResponse.UpdatedAt.EXAMPLE
         )
-        LocalDateTime updatedAt) {
+        LocalDateTime updatedAt
+) {
 }
