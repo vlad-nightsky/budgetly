@@ -28,7 +28,7 @@ import java.util.List;
 @RestController
 @RequestMapping(Route.ACCOUNTS)
 @RequiredArgsConstructor
-@Tag(name = Docs.AccountController.NAME, description = Docs.AccountController.DESCRIPTION)
+@Tag(name = Docs.AccountController.TITLE, description = Docs.AccountController.DESCRIPTION)
 public class AccountController {
 
     private final AccountService service;

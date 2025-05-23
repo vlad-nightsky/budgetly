@@ -6,7 +6,7 @@ package tech.nightsky.budgetly.doc;
 public class Docs {
 
     public static class AccountController {
-        public static final String NAME = "Управление аккаунтами";
+        public static final String TITLE = "Управление аккаунтами";
         public static final String DESCRIPTION = "Операции по управлению аккаунтами пользователя.";
 
         public static class GetAll {
@@ -110,6 +110,17 @@ public class Docs {
             public static final String SUMMARY = "Удаление категории";
             public static final String DESCRIPTION = "Запрос на удаление категории транзакций. Категория удаляется безвозвратно, восстановить её нельзя.";
             public static final String SUCCESS_MESSAGE = "Категория успешно удалена. Нечего возвращать.";
+        }
+    }
+
+    public static class ImportController {
+        public static final String TITLE = "Импорт транзакций";
+        public static final String DESCRIPTION = "Операции с импортом транзакций из разных банков.";
+
+        public static class ImportCsv {
+            public static final String SUMMARY = "Из файла CSV";
+            public static final String DESCRIPTION = "Импорт транзакций банка из файла с типом CSV.";
+            public static final String MESSAGE = "Список успешно импортирован.";
         }
     }
 
