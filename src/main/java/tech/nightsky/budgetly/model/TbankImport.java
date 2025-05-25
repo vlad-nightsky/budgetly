@@ -45,4 +45,34 @@ public class TbankImport {
      * Статус импорта (SUCCESS/ERROR/STARTED)
      */
     private ImportStatus status;
+
+    public TbankImport setSuccess(Integer transactionCount) {
+        if (transactionCount == null || transactionCount <= 0) {
+            throw new IllegalArgumentException("TransactionCount must be greater than 0");
+        }
+        this.setUpdatedAt(LocalDateTime.now());
+        this.setTransactionCount(transactionCount);
+        this.setStatus(ImportStatus.SUCCESS);
+        return this;
+    }
+
+    /**
+     * Создаёт пустой объект информации об импорте со стандартной информацией
+     *
+     * @return объект с метаинформацией о сессии импорта данных из Т-Банка
+     */
+    public static TbankImport init() {
+        return TbankImport.builder()
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .transactionCount(0)
+                .status(ImportStatus.STARTED)
+                .build();
+    }
+
+    public TbankImport setError() {
+        this.setUpdatedAt(LocalDateTime.now());
+        this.setStatus(ImportStatus.ERROR);
+        return this;
+    }
 }

@@ -1,10 +1,7 @@
 package tech.nightsky.budgetly.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
@@ -20,6 +17,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Table(name = "tbankTransaction", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(exclude = {"id","createdAt", "updatedAt", "tbankImport", "rowHash"})
 public class TbankTransaction {
     /**
      * Идентификатор
@@ -121,7 +119,7 @@ public class TbankTransaction {
     private BigDecimal roundedOperationAmount;
 
     /**
-     * SHA-256 хеш всех полей
+     * Хеш всех полей
      */
-    private String rowHash;
+    private int rowHash;
 }

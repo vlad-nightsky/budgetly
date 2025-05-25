@@ -71,6 +71,8 @@ public class CsvParser {
                 .bonuses(parseNumber(csvRecord.get("Бонусы (включая кэшбэк)")))
                 .investmentRounding(parseNumber(csvRecord.get("Округление на инвесткопилку")))
                 .roundedOperationAmount(parseNumber((csvRecord.get("Сумма операции с округлением"))))
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 
