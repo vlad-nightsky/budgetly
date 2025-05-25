@@ -42,16 +42,35 @@ public class TbankImport {
     private Integer transactionCount;
 
     /**
+     * Количество транзакций сохранённых в базу
+     */
+    private Integer saved;
+
+    /**
+     * Количество пропущенных транзакций.
+     * Транзакции не сохранены потому что дубликаты
+     */
+    private Integer skipped;
+
+    /**
      * Статус импорта (SUCCESS/ERROR/STARTED)
      */
     private ImportStatus status;
 
-    public TbankImport setSuccess(Integer transactionCount) {
+    public TbankImport setSuccess(Integer transactionCount, int skipped, int saved) {
         if (transactionCount == null || transactionCount <= 0) {
             throw new IllegalArgumentException("TransactionCount must be greater than 0");
         }
+        if (skipped < 0) {
+            throw new IllegalArgumentException("Skipped must be greater than 0");
+        }
+        if (saved < 0) {
+            throw new IllegalArgumentException("Saved must be greater than 0");
+        }
         this.setUpdatedAt(LocalDateTime.now());
         this.setTransactionCount(transactionCount);
+        this.setSaved(saved);
+        this.setSkipped(skipped);
         this.setStatus(ImportStatus.SUCCESS);
         return this;
     }
@@ -66,6 +85,8 @@ public class TbankImport {
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .transactionCount(0)
+                .skipped(0)
+                .saved(0)
                 .status(ImportStatus.STARTED)
                 .build();
     }

@@ -10,6 +10,7 @@ import tech.nightsky.budgetly.repository.TbankTransactionRepository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,28 +21,37 @@ public class ImportService {
 
     public TbankImport importCsv(MultipartFile file) {
         //при сохранении объекту присвоен ID
-        TbankImport tbankImport = importRepository.save(
-                TbankImport.init()
-        );
+        TbankImport tbankImport = importRepository.save(TbankImport.init());
         try {
             var finalTbankImport = tbankImport;
-            List<TbankTransaction> transactions = CsvParser.csvToTransaction(file.getInputStream())
+            List<TbankTransaction> rowTransactions = CsvParser.csvToTransaction(file.getInputStream())
                     .stream()
                     .peek(tr -> {
                         tr.setTbankImport(finalTbankImport);
                         tr.setRowHash(tr.hashCode());
                         tr.setUpdatedAt(LocalDateTime.now());
-                    })
-                    .toList();
-            transactions = transactionRepository.saveAll(transactions);
-            tbankImport = importRepository.save(
-                    tbankImport.setSuccess(transactions.size())
-            );
+                    }).toList();
+
+            var skipped = 0;
+            var saved = 0;
+            var newUniqueTransaction = new ArrayList<TbankTransaction>();
+            for (TbankTransaction transaction : rowTransactions) {
+                var rowHash = transaction.getRowHash();
+                if (transactionRepository.existsByRowHash(rowHash)) {
+                    var exisingTransactions = transactionRepository.findByRowHash(rowHash);
+                    if (exisingTransactions.stream().anyMatch(t -> t.equals(transaction))) {
+                        skipped++;
+                        continue;
+                    }
+                }
+                newUniqueTransaction.add(transactionRepository.save(transaction));
+                saved++;
+            }
+
+            tbankImport = importRepository.save(tbankImport.setSuccess(rowTransactions.size(), skipped, saved));
             return tbankImport;
         } catch (IOException ex) {
-            importRepository.save(
-                    tbankImport.setError()
-            );
+            importRepository.save(tbankImport.setError());
             throw new RuntimeException("Data is not store successfully: " + ex.getMessage());
         }
     }
