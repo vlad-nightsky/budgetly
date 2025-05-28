@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.tbankTransaction;
+package tech.nightsky.budgetly.tbankTransaction.internal;
 
 import jakarta.persistence.*;
 import lombok.*;

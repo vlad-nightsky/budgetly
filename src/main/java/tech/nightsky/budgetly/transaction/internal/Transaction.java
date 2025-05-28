@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.transaction;
+package tech.nightsky.budgetly.transaction.internal;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -6,9 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import tech.nightsky.budgetly.account.Account;
-import tech.nightsky.budgetly.category.Category;
-import tech.nightsky.budgetly.tbankTransaction.TransactionType;
+import tech.nightsky.budgetly.account.internal.Account;
+import tech.nightsky.budgetly.category.internal.Category;
+import tech.nightsky.budgetly.tbankTransaction.internal.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

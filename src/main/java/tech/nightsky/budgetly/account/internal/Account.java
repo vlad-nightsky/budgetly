@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.account;
+package tech.nightsky.budgetly.account.internal;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

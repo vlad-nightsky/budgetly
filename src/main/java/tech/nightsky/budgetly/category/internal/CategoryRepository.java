@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.category;
+package tech.nightsky.budgetly.category.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

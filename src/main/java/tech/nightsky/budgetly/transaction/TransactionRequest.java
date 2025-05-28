@@ -2,7 +2,7 @@ package tech.nightsky.budgetly.transaction;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
-import tech.nightsky.budgetly.tbankTransaction.TransactionType;
+import tech.nightsky.budgetly.tbankTransaction.internal.TransactionType;
 
 import java.math.BigDecimal;
 

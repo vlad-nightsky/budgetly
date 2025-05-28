@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
+import tech.nightsky.budgetly.account.internal.Account;
+import tech.nightsky.budgetly.account.internal.AccountRepository;
 import tech.nightsky.budgetly.core.NotFoundException;
 
 import java.time.LocalDateTime;

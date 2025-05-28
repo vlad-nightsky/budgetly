@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import tech.nightsky.budgetly.tbankTransaction.CsvParser;
-import tech.nightsky.budgetly.tbankTransaction.TbankTransaction;
-import tech.nightsky.budgetly.tbankTransaction.TbankImportRepository;
-import tech.nightsky.budgetly.tbankTransaction.TbankTransactionRepository;
+import tech.nightsky.budgetly.tbankTransaction.internal.TbankTransaction;
+import tech.nightsky.budgetly.tbankImport.internal.TbankImportRepository;
+import tech.nightsky.budgetly.tbankTransaction.internal.TbankTransactionRepository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

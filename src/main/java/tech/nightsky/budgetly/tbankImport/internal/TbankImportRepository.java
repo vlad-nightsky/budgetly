@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.tbankTransaction;
+package tech.nightsky.budgetly.tbankImport.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import tech.nightsky.budgetly.tbankImport.TbankImport;

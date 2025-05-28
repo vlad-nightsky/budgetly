@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.account.AccountService;
+import tech.nightsky.budgetly.category.internal.Category;
+import tech.nightsky.budgetly.category.internal.CategoryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

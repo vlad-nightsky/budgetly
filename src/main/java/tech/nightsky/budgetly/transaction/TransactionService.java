@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.account.AccountService;
 import tech.nightsky.budgetly.category.CategoryService;
 import tech.nightsky.budgetly.core.NotFoundException;
-import tech.nightsky.budgetly.account.Account;
-import tech.nightsky.budgetly.category.Category;
-import tech.nightsky.budgetly.tbankTransaction.TransactionRepository;
+import tech.nightsky.budgetly.account.internal.Account;
+import tech.nightsky.budgetly.category.internal.Category;
+import tech.nightsky.budgetly.tbankTransaction.internal.TransactionRepository;
+import tech.nightsky.budgetly.transaction.internal.Transaction;
 
 import java.time.LocalDateTime;
 import java.util.List;

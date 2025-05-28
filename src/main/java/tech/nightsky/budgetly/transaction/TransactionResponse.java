@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import tech.nightsky.budgetly.account.AccountResponse;
 import tech.nightsky.budgetly.category.CategoryResponse;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
-import tech.nightsky.budgetly.tbankTransaction.TransactionType;
+import tech.nightsky.budgetly.tbankTransaction.internal.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

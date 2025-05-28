@@ -4,9 +4,9 @@ import org.mapstruct.Mapper;
 import tech.nightsky.budgetly.account.AccountResponse;
 import tech.nightsky.budgetly.category.CategoryResponse;
 import tech.nightsky.budgetly.transaction.TransactionResponse;
-import tech.nightsky.budgetly.account.Account;
-import tech.nightsky.budgetly.category.Category;
-import tech.nightsky.budgetly.transaction.Transaction;
+import tech.nightsky.budgetly.account.internal.Account;
+import tech.nightsky.budgetly.category.internal.Category;
+import tech.nightsky.budgetly.transaction.internal.Transaction;
 
 @Mapper(componentModel = "spring")
 public interface ToRefactoringMapper {
