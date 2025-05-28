@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.account;
+package tech.nightsky.budgetly.account.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.account.AccountService;
+import tech.nightsky.budgetly.account.dto.AccountSummary;
 import tech.nightsky.budgetly.category.CategoryService;
 import tech.nightsky.budgetly.core.NotFoundException;
 import tech.nightsky.budgetly.account.internal.Account;
@@ -38,7 +39,7 @@ public class TransactionService {
 
     public Transaction saveTransaction(TransactionRequest transactionDto) {
         //todo сделать final
-        Account account = accountService.getAccountById(transactionDto.accountId())
+        AccountSummary account = accountService.getAccountById(transactionDto.accountId())
                 //todo корректная система ошибок
                 .orElseThrow(() -> new IllegalArgumentException("Account no found"));
 
@@ -47,7 +48,7 @@ public class TransactionService {
                 .orElseThrow(() -> new IllegalArgumentException("Category no found"));
 
         Transaction newTransaction = Transaction.builder()
-                .account(account)
+                .accountId(account.id())
                 .category(category)
                 .amount(transactionDto.amount())
                 .description(transactionDto.description())
@@ -68,7 +69,7 @@ public class TransactionService {
 
         existingTransaction.setUpdatedAt(LocalDateTime.now());
 
-        Account account = accountService.getAccountById(request.accountId())
+        AccountSummary account = accountService.getAccountById(request.accountId())
                 //todo корректная система ошибок
                 .orElseThrow(() -> NotFoundException.of(request.accountId()));
 
@@ -80,7 +81,7 @@ public class TransactionService {
         existingTransaction.setAmount(request.amount());
         existingTransaction.setType(request.type());
         existingTransaction.setCategory(category);
-        existingTransaction.setAccount(account);
+        existingTransaction.setAccountId(account.id());
 
         Transaction updatedTransaction = repository.save(existingTransaction);
 

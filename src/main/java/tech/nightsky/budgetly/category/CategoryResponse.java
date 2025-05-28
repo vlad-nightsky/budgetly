@@ -1,7 +1,6 @@
 package tech.nightsky.budgetly.category;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import tech.nightsky.budgetly.account.AccountResponse;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 import java.time.LocalDateTime;
@@ -32,7 +31,8 @@ public record CategoryResponse(
                 description = ToRefactoringDocs.CategoryResponse.Account.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY
         )
-        AccountResponse account,
+        //todo собразить аксесор
+        Long accountId,
 
         @Schema(
                 title = ToRefactoringDocs.CategoryResponse.CreatedAt.TITLE,

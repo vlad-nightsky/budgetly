@@ -1,7 +1,7 @@
 package tech.nightsky.budgetly.transaction;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import tech.nightsky.budgetly.account.AccountResponse;
+import tech.nightsky.budgetly.account.dto.AccountResponse;
 import tech.nightsky.budgetly.category.CategoryResponse;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
 import tech.nightsky.budgetly.tbankTransaction.internal.TransactionType;
@@ -58,7 +58,8 @@ public record TransactionResponse(
                 description = ToRefactoringDocs.TransactionResponse.Account.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY
         )
-        AccountResponse account,
+        //todo собразить аксесор
+        Long accountId,
 
         @Schema(
                 title = ToRefactoringDocs.TransactionResponse.CreatedAt.TITLE,

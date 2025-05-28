@@ -1,9 +1,7 @@
-package tech.nightsky.budgetly.account;
+package tech.nightsky.budgetly.account.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
-
-import java.time.LocalDateTime;
 
 @Schema(
         title = ToRefactoringDocs.AccountResponse.TITLE,
@@ -24,22 +22,6 @@ public record AccountResponse(
                 accessMode = Schema.AccessMode.READ_WRITE,
                 example = ToRefactoringDocs.AccountResponse.Username.EXAMPLE
         )
-        String username,
-
-        @Schema(
-                title = ToRefactoringDocs.AccountResponse.CreatedAt.TITLE,
-                description = ToRefactoringDocs.AccountResponse.CreatedAt.DESCRIPTION,
-                accessMode = Schema.AccessMode.READ_ONLY,
-                example = ToRefactoringDocs.AccountResponse.CreatedAt.EXAMPLE
-        )
-        LocalDateTime createdAt,
-
-        @Schema(
-                title = ToRefactoringDocs.AccountResponse.UpdatedAt.TITLE,
-                description = ToRefactoringDocs.AccountResponse.UpdatedAt.DESCRIPTION,
-                accessMode = Schema.AccessMode.READ_ONLY,
-                example = ToRefactoringDocs.AccountResponse.UpdatedAt.EXAMPLE
-        )
-        LocalDateTime updatedAt
+        String username
 ) {
 }

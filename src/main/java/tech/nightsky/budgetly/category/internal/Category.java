@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import tech.nightsky.budgetly.account.internal.Account;
 
 import java.time.LocalDateTime;
 
@@ -49,8 +48,6 @@ public class Category {
      * <p>
      * Обязательное поле
      */
-    @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
-    //todo нужно развязатся если хотим использовать модулит
-    private Account account;
+    private Long accountId;
 }

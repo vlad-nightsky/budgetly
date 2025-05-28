@@ -38,7 +38,7 @@ public class CategoryService {
                 .orElseThrow(() -> new IllegalArgumentException("Account no found"));
 
         val newCategory = Category.builder()
-                .account(account)
+                .accountId(account.id())
                 .name(request.name())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
@@ -60,7 +60,7 @@ public class CategoryService {
         val account = accountService.getAccountById(request.accountId())
                 //todo корректная система ошибок
                 .orElseThrow(() -> new IllegalArgumentException("Account no found"));
-        existingCategory.setAccount(account);
+        existingCategory.setAccountId(account.id());
 
         val updatedCategory = repository.save(existingCategory);
 

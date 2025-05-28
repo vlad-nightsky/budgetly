@@ -72,7 +72,6 @@ public class Transaction {
      * <p>
      * Обязательное поле
      */
-    @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
-    private Account account;
+    private Long accountId;
 }

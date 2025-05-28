@@ -14,11 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.nightsky.budgetly.core.Route;
-import tech.nightsky.budgetly.core.ToRefactoringDocs;
+import tech.nightsky.budgetly.account.dto.AccountRequest;
+import tech.nightsky.budgetly.account.dto.AccountResponse;
+import tech.nightsky.budgetly.account.internal.mapper.AccountMapper;
 import tech.nightsky.budgetly.core.ErrorResponse;
 import tech.nightsky.budgetly.core.NotFoundException;
-import tech.nightsky.budgetly.core.ToRefactoringMapper;
+import tech.nightsky.budgetly.core.Route;
+import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ import java.util.List;
 public class AccountController {
 
     private final AccountService service;
-    private final ToRefactoringMapper mapper;
+    private final AccountMapper mapper;
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = ToRefactoringDocs.AccountController.GetAll.SUMMARY, description = ToRefactoringDocs.AccountController.GetAll.DESCRIPTION)
@@ -62,7 +64,7 @@ public class AccountController {
         val location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path(Route.ID)
-                .buildAndExpand(account.getId())
+                .buildAndExpand(account.id())
                 .toUri();
 
         val response = mapper.map(account);
