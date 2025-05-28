@@ -1,9 +1,9 @@
 package tech.nightsky.budgetly.account;
 
+import org.springframework.modulith.NamedInterface;
 import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.account.dto.AccountRequest;
 import tech.nightsky.budgetly.account.dto.AccountSummary;
-import tech.nightsky.budgetly.account.internal.Account;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +14,7 @@ import java.util.Optional;
  * Бизнес логика
  */
 @Service
+@NamedInterface("account")
 public interface AccountService {
 
     List<AccountSummary> getAllAccounts();

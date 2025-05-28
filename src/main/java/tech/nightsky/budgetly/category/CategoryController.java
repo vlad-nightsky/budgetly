@@ -14,7 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.nightsky.budgetly.core.*;
+import tech.nightsky.budgetly.category.dto.CategoryRequest;
+import tech.nightsky.budgetly.category.dto.CategoryResponse;
+import tech.nightsky.budgetly.core.ErrorResponse;
+import tech.nightsky.budgetly.core.NotFoundException;
+import tech.nightsky.budgetly.core.Route;
+import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 import java.util.List;
 
@@ -24,9 +29,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = ToRefactoringDocs.CategoryController.NAME, description = ToRefactoringDocs.CategoryController.DESCRIPTION)
 public class CategoryController {
-
     private final CategoryService service;
-    private final ToRefactoringMapper mapper;
+    private final CategoryControllerMapper mapper;
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = ToRefactoringDocs.CategoryController.GetAll.SUMMARY, description = ToRefactoringDocs.CategoryController.GetAll.DESCRIPTION)
@@ -57,7 +61,7 @@ public class CategoryController {
         val location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path(Route.ID)
-                .buildAndExpand(category.getId())
+                .buildAndExpand(category.id())
                 .toUri();
 
         val response = mapper.map(category);

@@ -1,14 +1,14 @@
-package tech.nightsky.budgetly.category;
+package tech.nightsky.budgetly.category.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.modulith.NamedInterface;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
-
-import java.time.LocalDateTime;
 
 @Schema(
         title = ToRefactoringDocs.CategoryResponse.TITLE,
         description = ToRefactoringDocs.CategoryResponse.DESCRIPTION
 )
+@NamedInterface("category")
 public record CategoryResponse(
         @Schema(
                 title = ToRefactoringDocs.CategoryResponse.Id.TITLE,
@@ -32,22 +32,6 @@ public record CategoryResponse(
                 accessMode = Schema.AccessMode.READ_ONLY
         )
         //todo собразить аксесор
-        Long accountId,
-
-        @Schema(
-                title = ToRefactoringDocs.CategoryResponse.CreatedAt.TITLE,
-                description = ToRefactoringDocs.CategoryResponse.CreatedAt.DESCRIPTION,
-                accessMode = Schema.AccessMode.READ_ONLY,
-                example = ToRefactoringDocs.CategoryResponse.CreatedAt.EXAMPLE
-        )
-        LocalDateTime createdAt,
-
-        @Schema(
-                title = ToRefactoringDocs.CategoryResponse.UpdatedAt.TITLE,
-                description = ToRefactoringDocs.CategoryResponse.UpdatedAt.DESCRIPTION,
-                accessMode = Schema.AccessMode.READ_ONLY,
-                example = ToRefactoringDocs.CategoryResponse.UpdatedAt.EXAMPLE
-        )
-        LocalDateTime updatedAt
+        Long accountId
 ) {
 }

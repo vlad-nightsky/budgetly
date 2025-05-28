@@ -1,14 +1,10 @@
 package tech.nightsky.budgetly.category;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
+import org.springframework.modulith.NamedInterface;
 import org.springframework.stereotype.Service;
-import tech.nightsky.budgetly.account.AccountService;
-import tech.nightsky.budgetly.category.internal.Category;
-import tech.nightsky.budgetly.category.internal.CategoryRepository;
+import tech.nightsky.budgetly.category.dto.CategoryRequest;
+import tech.nightsky.budgetly.category.dto.CategorySummary;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,58 +13,17 @@ import java.util.Optional;
  * <p>
  * Бизнес логика
  */
-@Slf4j
 @Service
-@RequiredArgsConstructor
-public class CategoryService {
-    private final CategoryRepository repository;
-    private final AccountService accountService;
+@NamedInterface("category")
+public interface CategoryService {
 
-    public List<Category> getAllCategories() {
-        return repository.findAll();
-    }
+    List<CategorySummary> getAllCategories();
 
-    public Optional<Category> getCategoryById(Long id) {
-        return repository.findById(id);
-    }
+    Optional<CategorySummary> getCategoryById(Long id);
 
-    public Category saveCategory(CategoryRequest request) {
-        val account = accountService.getAccountById(request.accountId())
-                //todo корректная система ошибок
-                .orElseThrow(() -> new IllegalArgumentException("Account no found"));
+    CategorySummary saveCategory(CategoryRequest request);
 
-        val newCategory = Category.builder()
-                .accountId(account.id())
-                .name(request.name())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .build();
+    CategorySummary updateCategory(Long id, CategoryRequest request);
 
-        val savedCategory = repository.save(newCategory);
-
-        log.info("Категория с идентификатором: {} сохранён успешно", newCategory.getId());
-        return savedCategory;
-    }
-
-    public Category updateCategory(Long id, CategoryRequest request) {
-        val existingCategory = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Category no found"));
-
-        existingCategory.setUpdatedAt(LocalDateTime.now());
-        existingCategory.setName(request.name());
-
-        val account = accountService.getAccountById(request.accountId())
-                //todo корректная система ошибок
-                .orElseThrow(() -> new IllegalArgumentException("Account no found"));
-        existingCategory.setAccountId(account.id());
-
-        val updatedCategory = repository.save(existingCategory);
-
-        log.info("Категория с идентификатором: {} обновлён успешно", updatedCategory.getId());
-        return updatedCategory;
-    }
-
-    public void deleteCategoryById(Long id) {
-        repository.deleteById(id);
-    }
+    void deleteCategoryById(Long id);
 }

@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.tbankTransaction;
+package tech.nightsky.budgetly.transaction;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,10 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.nightsky.budgetly.core.*;
-import tech.nightsky.budgetly.transaction.TransactionRequest;
-import tech.nightsky.budgetly.transaction.TransactionResponse;
-import tech.nightsky.budgetly.transaction.TransactionService;
+import tech.nightsky.budgetly.core.ErrorResponse;
+import tech.nightsky.budgetly.core.NotFoundException;
+import tech.nightsky.budgetly.core.Route;
+import tech.nightsky.budgetly.core.ToRefactoringDocs;
+import tech.nightsky.budgetly.transaction.dto.TransactionRequest;
+import tech.nightsky.budgetly.transaction.dto.TransactionResponse;
 
 import java.util.List;
 
@@ -28,9 +30,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = ToRefactoringDocs.TransactionController.NAME, description = ToRefactoringDocs.TransactionController.DESCRIPTION)
 public class TransactionController {
-
     private final TransactionService service;
-    private final ToRefactoringMapper mapper;
+    private final TransactionControllerMapper mapper;
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = ToRefactoringDocs.TransactionController.GetAll.SUMMARY, description = ToRefactoringDocs.TransactionController.GetAll.DESCRIPTION)
@@ -62,7 +63,7 @@ public class TransactionController {
         val location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path(Route.ID)
-                .buildAndExpand(transaction.getId())
+                .buildAndExpand(transaction.id())
                 .toUri();
 
         val response = mapper.map(transaction);

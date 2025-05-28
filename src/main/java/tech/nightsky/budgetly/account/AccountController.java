@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.nightsky.budgetly.account.dto.AccountRequest;
 import tech.nightsky.budgetly.account.dto.AccountResponse;
-import tech.nightsky.budgetly.account.internal.mapper.AccountMapper;
 import tech.nightsky.budgetly.core.ErrorResponse;
 import tech.nightsky.budgetly.core.NotFoundException;
 import tech.nightsky.budgetly.core.Route;
@@ -32,7 +31,7 @@ import java.util.List;
 public class AccountController {
 
     private final AccountService service;
-    private final AccountMapper mapper;
+    private final AccountControllerMapper mapper;
 
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = ToRefactoringDocs.AccountController.GetAll.SUMMARY, description = ToRefactoringDocs.AccountController.GetAll.DESCRIPTION)

@@ -1,11 +1,10 @@
-package tech.nightsky.budgetly.tbankImport;
+package tech.nightsky.budgetly.tbankTransaction;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import tech.nightsky.budgetly.tbankTransaction.CsvParser;
+import tech.nightsky.budgetly.tbankTransaction.internal.TbankImportRepository;
 import tech.nightsky.budgetly.tbankTransaction.internal.TbankTransaction;
-import tech.nightsky.budgetly.tbankImport.internal.TbankImportRepository;
 import tech.nightsky.budgetly.tbankTransaction.internal.TbankTransactionRepository;
 
 import java.io.IOException;

@@ -1,12 +1,13 @@
-package tech.nightsky.budgetly.account.internal;
+package tech.nightsky.budgetly.account;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import tech.nightsky.budgetly.account.AccountService;
 import tech.nightsky.budgetly.account.dto.AccountRequest;
 import tech.nightsky.budgetly.account.dto.AccountSummary;
-import tech.nightsky.budgetly.account.internal.mapper.AccountMapper;
+import tech.nightsky.budgetly.account.internal.Account;
+import tech.nightsky.budgetly.account.internal.AccountMapper;
+import tech.nightsky.budgetly.account.internal.AccountRepository;
 import tech.nightsky.budgetly.core.NotFoundException;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
-public class AccountServiceImpl implements AccountService {
+class AccountServiceImpl implements AccountService {
 
     private final AccountRepository repository;
     private final AccountMapper mapper;

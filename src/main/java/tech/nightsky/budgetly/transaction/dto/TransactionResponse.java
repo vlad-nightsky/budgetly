@@ -1,15 +1,13 @@
-package tech.nightsky.budgetly.transaction;
+package tech.nightsky.budgetly.transaction.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import tech.nightsky.budgetly.account.dto.AccountResponse;
-import tech.nightsky.budgetly.category.CategoryResponse;
+import org.springframework.modulith.NamedInterface;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
-import tech.nightsky.budgetly.tbankTransaction.internal.TransactionType;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Schema(title = ToRefactoringDocs.TransactionResponse.TITLE, description = ToRefactoringDocs.TransactionResponse.DESCRIPTION)
+@NamedInterface("transaction")
 public record TransactionResponse(
         @Schema(
                 title = ToRefactoringDocs.TransactionResponse.Id.TITLE,
@@ -51,7 +49,7 @@ public record TransactionResponse(
                 description = ToRefactoringDocs.TransactionResponse.Category.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY
         )
-        CategoryResponse category,
+        Long categoryId,
 
         @Schema(
                 title = ToRefactoringDocs.TransactionResponse.Account.TITLE,
@@ -59,21 +57,5 @@ public record TransactionResponse(
                 accessMode = Schema.AccessMode.READ_ONLY
         )
         //todo собразить аксесор
-        Long accountId,
-
-        @Schema(
-                title = ToRefactoringDocs.TransactionResponse.CreatedAt.TITLE,
-                description = ToRefactoringDocs.TransactionResponse.CreatedAt.DESCRIPTION,
-                accessMode = Schema.AccessMode.READ_ONLY,
-                example = ToRefactoringDocs.TransactionResponse.CreatedAt.EXAMPLE
-        )
-        LocalDateTime createdAt,
-
-        @Schema(
-                title = ToRefactoringDocs.TransactionResponse.UpdatedAt.TITLE,
-                description = ToRefactoringDocs.TransactionResponse.UpdatedAt.DESCRIPTION,
-                accessMode = Schema.AccessMode.READ_ONLY,
-                example = ToRefactoringDocs.TransactionResponse.UpdatedAt.EXAMPLE
-        )
-        LocalDateTime updatedAt) {
+        Long accountId) {
 }

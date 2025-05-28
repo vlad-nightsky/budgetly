@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import tech.nightsky.budgetly.account.internal.Account;
-import tech.nightsky.budgetly.category.internal.Category;
-import tech.nightsky.budgetly.tbankTransaction.internal.TransactionType;
+import tech.nightsky.budgetly.transaction.dto.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -63,9 +61,8 @@ public class Transaction {
      * <p>
      * Обязательное поле
      */
-    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    private Long categoryId;
 
     /**
      * Идентификатор пользователя (связь Many-to-One).

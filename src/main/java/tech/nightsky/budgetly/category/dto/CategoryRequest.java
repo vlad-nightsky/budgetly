@@ -1,6 +1,7 @@
-package tech.nightsky.budgetly.category;
+package tech.nightsky.budgetly.category.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.modulith.NamedInterface;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 /**
@@ -12,6 +13,7 @@ import tech.nightsky.budgetly.core.ToRefactoringDocs;
 @Schema(title = ToRefactoringDocs.CategoryRequest.TITLE,
         description = ToRefactoringDocs.CategoryRequest.DESCRIPTION
 )
+@NamedInterface("category")
 public record CategoryRequest(
         @Schema(
                 title = ToRefactoringDocs.CategoryRequest.Name.TITLE,

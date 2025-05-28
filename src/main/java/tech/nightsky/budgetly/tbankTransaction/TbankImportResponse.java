@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.tbankImport;
+package tech.nightsky.budgetly.tbankTransaction;
 
 import tech.nightsky.budgetly.core.ImportStatus;
 

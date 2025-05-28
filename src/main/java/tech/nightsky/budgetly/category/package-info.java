@@ -3,5 +3,5 @@
  * Этот модуль помогает группировать транзакции.
  */
 @org.springframework.lang.NonNullApi
-@org.springframework.modulith.NamedInterface("Category")
+@org.springframework.modulith.NamedInterface("category")
 package tech.nightsky.budgetly.category;

@@ -3,7 +3,7 @@ package tech.nightsky.budgetly.tbankTransaction.internal;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import tech.nightsky.budgetly.tbankImport.TbankImport;
+import tech.nightsky.budgetly.tbankTransaction.TbankImport;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Table(name = "tbankTransaction", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(exclude = {"id","createdAt", "updatedAt", "tbankImport", "rowHash"})
+@EqualsAndHashCode(exclude = {"id", "createdAt", "updatedAt", "tbankImport", "rowHash"})
 public class TbankTransaction {
     /**
      * Идентификатор

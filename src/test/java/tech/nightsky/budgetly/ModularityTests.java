@@ -1,8 +1,8 @@
 package tech.nightsky.budgetly;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.modulith.docs.Documenter;
 import org.springframework.modulith.core.ApplicationModules;
+import org.springframework.modulith.docs.Documenter;
 
 public class ModularityTests {
     @Test

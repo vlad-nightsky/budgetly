@@ -1,7 +1,7 @@
-package tech.nightsky.budgetly.tbankImport.internal;
+package tech.nightsky.budgetly.tbankTransaction.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import tech.nightsky.budgetly.tbankImport.TbankImport;
+import tech.nightsky.budgetly.tbankTransaction.TbankImport;
 
 /**
  * Репозиторий для управления информацией об импорте транзакций из т-банка.
