@@ -57,6 +57,22 @@ public class TbankImport {
      */
     private ImportStatus status;
 
+    /**
+     * Создаёт пустой объект информации об импорте со стандартной информацией
+     *
+     * @return объект с метаинформацией о сессии импорта данных из Т-Банка
+     */
+    public static TbankImport init() {
+        return TbankImport.builder()
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .transactionCount(0)
+                .skipped(0)
+                .saved(0)
+                .status(ImportStatus.STARTED)
+                .build();
+    }
+
     public TbankImport setSuccess(Integer transactionCount, int skipped, int saved) {
         if (transactionCount == null || transactionCount <= 0) {
             throw new IllegalArgumentException("TransactionCount must be greater than 0");
@@ -73,22 +89,6 @@ public class TbankImport {
         this.setSkipped(skipped);
         this.setStatus(ImportStatus.SUCCESS);
         return this;
-    }
-
-    /**
-     * Создаёт пустой объект информации об импорте со стандартной информацией
-     *
-     * @return объект с метаинформацией о сессии импорта данных из Т-Банка
-     */
-    public static TbankImport init() {
-        return TbankImport.builder()
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .transactionCount(0)
-                .skipped(0)
-                .saved(0)
-                .status(ImportStatus.STARTED)
-                .build();
     }
 
     public TbankImport setError() {

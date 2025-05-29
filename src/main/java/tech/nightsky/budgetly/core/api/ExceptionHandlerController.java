@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
-import tech.nightsky.budgetly.core.util.ErrorUtil;
 import tech.nightsky.budgetly.core.exception.NotFoundException;
+import tech.nightsky.budgetly.core.util.ErrorUtil;
 
 import java.util.Collections;
 
