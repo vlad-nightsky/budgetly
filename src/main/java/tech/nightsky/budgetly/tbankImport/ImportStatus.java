@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.tbankTransaction;
+package tech.nightsky.budgetly.tbankImport;
 
 public enum ImportStatus {
     SUCCESS,

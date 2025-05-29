@@ -3,7 +3,6 @@ package tech.nightsky.budgetly.tbankTransaction.internal;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import tech.nightsky.budgetly.tbankTransaction.TbankImport;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,8 +17,8 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Table(name = "tbankTransaction", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(exclude = {"id", "createdAt", "updatedAt", "tbankImport", "rowHash"})
-public class TbankTransaction {
+@EqualsAndHashCode(exclude = {"id", "createdAt", "updatedAt", "tbankImportId", "rowHash"})
+class TbankTransaction {
     /**
      * Идентификатор
      */
@@ -40,9 +39,8 @@ public class TbankTransaction {
     /**
      * Идентификатор импорта
      */
-    @ManyToOne
     @JoinColumn(name = "import_id", nullable = false)
-    private TbankImport tbankImport;
+    private Long tbankImportId;
 
     /**
      * Дата и время операции
@@ -122,5 +120,12 @@ public class TbankTransaction {
     /**
      * Хеш всех полей
      */
-    private int rowHash;
+    private Integer rowHash;
+
+    public TbankTransaction finishParse(Long tbankImportId) {
+        this.setTbankImportId(tbankImportId);
+        this.setRowHash(hashCode());
+        this.setUpdatedAt(LocalDateTime.now());
+        return this;
+    }
 }

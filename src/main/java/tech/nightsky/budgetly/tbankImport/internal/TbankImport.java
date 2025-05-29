@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.tbankTransaction;
+package tech.nightsky.budgetly.tbankImport.internal;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import tech.nightsky.budgetly.tbankImport.ImportStatus;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Table(name = "tbankImport", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TbankImport {
+class TbankImport {
     /**
      * Идентификатор
      */

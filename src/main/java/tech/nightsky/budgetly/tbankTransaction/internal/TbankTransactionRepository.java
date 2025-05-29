@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Репозиторий для управления сырыvb данные транзакциями из Т-банк с привязкой к сессии импорта.
  */
-public interface TbankTransactionRepository extends JpaRepository<TbankTransaction, Long> {
+interface TbankTransactionRepository extends JpaRepository<TbankTransaction, Long> {
     List<TbankTransaction> findByRowHash(Integer rowHash);
 
     boolean existsByRowHash(Integer rowHash);
