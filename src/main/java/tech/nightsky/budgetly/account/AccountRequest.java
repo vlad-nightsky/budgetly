@@ -1,7 +1,6 @@
-package tech.nightsky.budgetly.account.dto;
+package tech.nightsky.budgetly.account;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.modulith.NamedInterface;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 /**
@@ -14,7 +13,6 @@ import tech.nightsky.budgetly.core.ToRefactoringDocs;
         title = ToRefactoringDocs.AccountRequest.TITLE,
         description = ToRefactoringDocs.AccountRequest.DESCRIPTION
 )
-@NamedInterface("account")
 public record AccountRequest(
         @Schema(
                 title = ToRefactoringDocs.AccountRequest.Username.TITLE,

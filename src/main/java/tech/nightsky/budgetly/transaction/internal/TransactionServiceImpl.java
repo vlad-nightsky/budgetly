@@ -1,17 +1,15 @@
-package tech.nightsky.budgetly.transaction;
+package tech.nightsky.budgetly.transaction.internal;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import tech.nightsky.budgetly.account.AccountService;
-import tech.nightsky.budgetly.account.dto.AccountSummary;
+import tech.nightsky.budgetly.account.AccountSummary;
 import tech.nightsky.budgetly.category.CategoryService;
-import tech.nightsky.budgetly.category.dto.CategorySummary;
+import tech.nightsky.budgetly.category.CategorySummary;
 import tech.nightsky.budgetly.core.NotFoundException;
-import tech.nightsky.budgetly.transaction.dto.TransactionRequest;
-import tech.nightsky.budgetly.transaction.dto.TransactionSummary;
-import tech.nightsky.budgetly.transaction.internal.Transaction;
-import tech.nightsky.budgetly.transaction.internal.TransactionMapper;
-import tech.nightsky.budgetly.transaction.internal.TransactionRepository;
+import tech.nightsky.budgetly.transaction.TransactionService;
+import tech.nightsky.budgetly.transaction.TransactionRequest;
+import tech.nightsky.budgetly.transaction.TransactionSummary;
 
 import java.time.LocalDateTime;
 import java.util.List;

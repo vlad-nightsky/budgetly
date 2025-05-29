@@ -1,14 +1,12 @@
-package tech.nightsky.budgetly.category;
+package tech.nightsky.budgetly.category.internal;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import tech.nightsky.budgetly.account.AccountService;
-import tech.nightsky.budgetly.category.dto.CategoryRequest;
-import tech.nightsky.budgetly.category.dto.CategorySummary;
-import tech.nightsky.budgetly.category.internal.Category;
-import tech.nightsky.budgetly.category.internal.CategoryMapper;
-import tech.nightsky.budgetly.category.internal.CategoryRepository;
+import tech.nightsky.budgetly.category.CategoryService;
+import tech.nightsky.budgetly.category.CategoryRequest;
+import tech.nightsky.budgetly.category.CategorySummary;
 
 import java.time.LocalDateTime;
 import java.util.List;

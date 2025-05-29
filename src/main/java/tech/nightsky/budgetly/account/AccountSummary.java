@@ -1,6 +1,4 @@
-package tech.nightsky.budgetly.account.dto;
-
-import org.springframework.modulith.NamedInterface;
+package tech.nightsky.budgetly.account;
 
 /**
  * Информация об аккаунте пользователя для остальных модулей
@@ -8,7 +6,6 @@ import org.springframework.modulith.NamedInterface;
  * @param id       идентификатор покупателя
  * @param username имя пользвоателя
  */
-@NamedInterface("account")
 public record AccountSummary(
         Long id,
         String username

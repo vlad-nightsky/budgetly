@@ -1,9 +1,9 @@
 package tech.nightsky.budgetly.account.internal;
 
 import org.mapstruct.Mapper;
-import tech.nightsky.budgetly.account.dto.AccountSummary;
+import tech.nightsky.budgetly.account.AccountSummary;
 
 @Mapper(componentModel = "spring")
-public interface AccountMapper {
+interface AccountMapper {
     AccountSummary map(Account account);
 }

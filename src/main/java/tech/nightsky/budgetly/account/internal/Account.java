@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Table(name = "account", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Account {
+class Account {
     /**
      * Идентификатор
      */

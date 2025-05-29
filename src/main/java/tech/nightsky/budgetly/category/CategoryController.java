@@ -14,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.nightsky.budgetly.category.dto.CategoryRequest;
-import tech.nightsky.budgetly.category.dto.CategoryResponse;
 import tech.nightsky.budgetly.core.ErrorResponse;
 import tech.nightsky.budgetly.core.NotFoundException;
 import tech.nightsky.budgetly.core.Route;

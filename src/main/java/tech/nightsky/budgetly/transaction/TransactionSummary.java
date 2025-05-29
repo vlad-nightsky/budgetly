@@ -1,10 +1,7 @@
-package tech.nightsky.budgetly.transaction.dto;
-
-import org.springframework.modulith.NamedInterface;
+package tech.nightsky.budgetly.transaction;
 
 import java.math.BigDecimal;
 
-@NamedInterface("transaction")
 public record TransactionSummary(
         Long id,
         BigDecimal amount,

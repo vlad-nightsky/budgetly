@@ -1,9 +1,6 @@
 package tech.nightsky.budgetly.category;
 
-import org.springframework.modulith.NamedInterface;
 import org.springframework.stereotype.Service;
-import tech.nightsky.budgetly.category.dto.CategoryRequest;
-import tech.nightsky.budgetly.category.dto.CategorySummary;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +11,6 @@ import java.util.Optional;
  * Бизнес логика
  */
 @Service
-@NamedInterface("category")
 public interface CategoryService {
 
     List<CategorySummary> getAllCategories();

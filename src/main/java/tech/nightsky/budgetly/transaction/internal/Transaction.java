@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import tech.nightsky.budgetly.transaction.dto.TransactionType;
+import tech.nightsky.budgetly.transaction.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Table(name = "transaction", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Transaction {
+class Transaction {
     /**
      * Идентификатор
      */

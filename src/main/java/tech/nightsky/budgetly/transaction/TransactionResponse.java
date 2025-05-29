@@ -1,13 +1,11 @@
-package tech.nightsky.budgetly.transaction.dto;
+package tech.nightsky.budgetly.transaction;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.modulith.NamedInterface;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 import java.math.BigDecimal;
 
 @Schema(title = ToRefactoringDocs.TransactionResponse.TITLE, description = ToRefactoringDocs.TransactionResponse.DESCRIPTION)
-@NamedInterface("transaction")
 public record TransactionResponse(
         @Schema(
                 title = ToRefactoringDocs.TransactionResponse.Id.TITLE,
