@@ -6,9 +6,9 @@ import tech.nightsky.budgetly.account.AccountService;
 import tech.nightsky.budgetly.account.AccountSummary;
 import tech.nightsky.budgetly.category.CategoryService;
 import tech.nightsky.budgetly.category.CategorySummary;
-import tech.nightsky.budgetly.core.NotFoundException;
+import tech.nightsky.budgetly.core.exception.NotFoundException;
 import tech.nightsky.budgetly.transaction.TransactionService;
-import tech.nightsky.budgetly.transaction.TransactionRequest;
+import tech.nightsky.budgetly.transaction.api.TransactionRequest;
 import tech.nightsky.budgetly.transaction.TransactionSummary;
 
 import java.time.LocalDateTime;

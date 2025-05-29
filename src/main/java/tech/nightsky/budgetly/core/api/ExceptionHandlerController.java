@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.core;
+package tech.nightsky.budgetly.core.api;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
+import tech.nightsky.budgetly.core.util.ErrorUtil;
+import tech.nightsky.budgetly.core.exception.NotFoundException;
 
 import java.util.Collections;
 
@@ -25,7 +27,7 @@ public class ExceptionHandlerController {
                 .body(
                         ErrorResponse.builder()
                                 .message(ex.getMessage())
-                                .error(ErrorUtils.exToError(ex.getClass().getSimpleName()))
+                                .error(ErrorUtil.exToError(ex.getClass().getSimpleName()))
                                 .code(HttpStatus.NOT_FOUND.value())
                                 .details(Collections.emptyList())
                                 .build()

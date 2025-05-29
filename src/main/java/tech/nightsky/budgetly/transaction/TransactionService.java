@@ -1,6 +1,7 @@
 package tech.nightsky.budgetly.transaction;
 
 import org.springframework.stereotype.Service;
+import tech.nightsky.budgetly.transaction.api.TransactionRequest;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,11 +1,11 @@
-package tech.nightsky.budgetly.core;
+package tech.nightsky.budgetly.core.util;
 
 /**
  * Утилитный класс для работы с ошибками и исключениями.
  * <p>
  * Этот класс предоставляет статические методы для преобразования строк, связанных с исключениями.
  */
-public class ErrorUtils {
+public class ErrorUtil {
 
     /**
      * Удаляет суффикс "Exception" из переданного имени класса, если он присутствует.

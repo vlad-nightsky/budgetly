@@ -1,5 +1,7 @@
-package tech.nightsky.budgetly.core;
+package tech.nightsky.budgetly.core.exception;
 
+
+import tech.nightsky.budgetly.core.api.ErrorMessage;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

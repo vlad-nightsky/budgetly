@@ -1,7 +1,8 @@
-package tech.nightsky.budgetly.core;
+package tech.nightsky.budgetly.core.api;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
+import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 import java.util.List;
 

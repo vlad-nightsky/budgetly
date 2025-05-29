@@ -1,7 +1,5 @@
 package tech.nightsky.budgetly.tbankTransaction;
 
-import tech.nightsky.budgetly.core.ImportStatus;
-
 import java.time.LocalDateTime;
 
 public record TbankImportResponse(

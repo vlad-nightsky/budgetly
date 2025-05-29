@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.core;
+package tech.nightsky.budgetly.core.api;
 
 public class Route {
     //Общий домен

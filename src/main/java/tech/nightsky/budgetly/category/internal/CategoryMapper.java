@@ -1,7 +1,7 @@
 package tech.nightsky.budgetly.category.internal;
 
 import org.mapstruct.Mapper;
-import tech.nightsky.budgetly.category.CategoryResponse;
+import tech.nightsky.budgetly.category.api.CategoryResponse;
 import tech.nightsky.budgetly.category.CategorySummary;
 
 @Mapper(componentModel = "spring")

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import tech.nightsky.budgetly.core.ImportStatus;
 
 import java.time.LocalDateTime;
 

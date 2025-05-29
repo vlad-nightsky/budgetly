@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.category;
+package tech.nightsky.budgetly.category.api;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;

@@ -1,6 +1,7 @@
 package tech.nightsky.budgetly.category;
 
 import org.springframework.stereotype.Service;
+import tech.nightsky.budgetly.category.api.CategoryRequest;
 
 import java.util.List;
 import java.util.Optional;

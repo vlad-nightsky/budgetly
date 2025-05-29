@@ -1,6 +1,7 @@
-package tech.nightsky.budgetly.core;
+package tech.nightsky.budgetly.core.api;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import tech.nightsky.budgetly.core.ToRefactoringDocs;
 
 /**
  * Класс ErrorDetailResponse представляет детализированную информацию об ошибке.

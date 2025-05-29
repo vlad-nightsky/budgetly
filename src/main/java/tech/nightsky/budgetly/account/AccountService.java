@@ -1,6 +1,7 @@
 package tech.nightsky.budgetly.account;
 
 import org.springframework.stereotype.Service;
+import tech.nightsky.budgetly.account.api.AccountRequest;
 
 import java.util.List;
 import java.util.Optional;

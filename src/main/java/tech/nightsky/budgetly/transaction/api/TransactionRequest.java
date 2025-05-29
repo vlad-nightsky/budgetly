@@ -1,7 +1,8 @@
-package tech.nightsky.budgetly.transaction;
+package tech.nightsky.budgetly.transaction.api;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
+import tech.nightsky.budgetly.transaction.TransactionType;
 
 import java.math.BigDecimal;
 

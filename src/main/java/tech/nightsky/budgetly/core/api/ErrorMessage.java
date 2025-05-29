@@ -1,4 +1,4 @@
-package tech.nightsky.budgetly.core;
+package tech.nightsky.budgetly.core.api;
 
 public class ErrorMessage {
     public static final String NOT_FOUND_REASON = "Entity not Found.";
