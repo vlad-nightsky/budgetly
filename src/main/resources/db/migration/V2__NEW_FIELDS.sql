@@ -7,5 +7,5 @@ ALTER TABLE tbank_import
 
 -- 2. Заполняем существующие записи значением 0
 UPDATE tbank_import
-SET saved = 0,
+SET saved   = 0,
     skipped = 0;
