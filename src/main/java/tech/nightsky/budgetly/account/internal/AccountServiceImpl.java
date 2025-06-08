@@ -3,6 +3,10 @@ package tech.nightsky.budgetly.account.internal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tech.nightsky.budgetly.account.AccountCreated;
 import tech.nightsky.budgetly.account.AccountService;
 import tech.nightsky.budgetly.account.AccountSummary;
 import tech.nightsky.budgetly.account.api.AccountRequest;
@@ -14,11 +18,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Service
 @RequiredArgsConstructor
 class AccountServiceImpl implements AccountService {
-
     private final AccountRepository repository;
     private final AccountMapper mapper;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public List<AccountSummary> getAllAccounts() {
@@ -32,7 +37,8 @@ class AccountServiceImpl implements AccountService {
 
     //todo добавить хеширования пароля и простую авторизацию
     @Override
-    public AccountSummary saveAccount(AccountRequest request) {
+    @Transactional
+    public AccountSummary createAccount(AccountRequest request) {
         val account = Account.builder()
                 .username(request.username())
                 .password(request.password())
@@ -41,6 +47,8 @@ class AccountServiceImpl implements AccountService {
                 .build();
 
         val savedAccount = repository.save(account);
+
+        eventPublisher.publishEvent(new AccountCreated(mapper.map(account)));
 
         log.info("Пользователь с идентификатором: {} сохранён успешно", account.getId());
         return mapper.map(savedAccount);

@@ -1,6 +1,5 @@
 package tech.nightsky.budgetly.account;
 
-import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.account.api.AccountRequest;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.Optional;
  * <p>
  * Бизнес логика
  */
-@Service
 public interface AccountService {
 
     List<AccountSummary> getAllAccounts();
@@ -19,7 +17,7 @@ public interface AccountService {
     Optional<AccountSummary> getAccountById(Long id);
 
     //todo добавить документацию
-    AccountSummary saveAccount(AccountRequest request);
+    AccountSummary createAccount(AccountRequest request);
 
     AccountSummary updateAccount(Long id, AccountRequest request);
 

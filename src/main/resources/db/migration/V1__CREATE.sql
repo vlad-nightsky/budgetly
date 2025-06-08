@@ -14,6 +14,7 @@ CREATE TABLE budgyscheme.category
     created_at TIMESTAMP WITHOUT TIME ZONE,
     updated_at TIMESTAMP WITHOUT TIME ZONE,
     name       VARCHAR(255),
+    code       VARCHAR(255),
     account_id BIGINT                                  NOT NULL,
     CONSTRAINT pk_category PRIMARY KEY (id)
 );
@@ -24,6 +25,8 @@ CREATE TABLE budgyscheme.tbank_import
     created_at        TIMESTAMP WITHOUT TIME ZONE,
     updated_at        TIMESTAMP WITHOUT TIME ZONE,
     transaction_count INTEGER,
+    saved             INTEGER,
+    skipped           INTEGER,
     status            SMALLINT,
     CONSTRAINT pk_tbankimport PRIMARY KEY (id)
 );
@@ -49,7 +52,7 @@ CREATE TABLE budgyscheme.tbank_transaction
     bonuses                  DECIMAL,
     investment_rounding      DECIMAL,
     rounded_operation_amount DECIMAL,
-    row_hash                 VARCHAR(255),
+    row_hash                 INTEGER,
     CONSTRAINT pk_tbanktransaction PRIMARY KEY (id)
 );
 
@@ -65,15 +68,3 @@ CREATE TABLE budgyscheme.transaction
     account_id  BIGINT                                  NOT NULL,
     CONSTRAINT pk_transaction PRIMARY KEY (id)
 );
-
-ALTER TABLE budgyscheme.category
-    ADD CONSTRAINT FK_CATEGORY_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES budgyscheme.account (id);
-
-ALTER TABLE budgyscheme.tbank_transaction
-    ADD CONSTRAINT FK_TBANKTRANSACTION_ON_IMPORT FOREIGN KEY (import_id) REFERENCES budgyscheme.tbank_import (id);
-
-ALTER TABLE budgyscheme.transaction
-    ADD CONSTRAINT FK_TRANSACTION_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES budgyscheme.account (id);
-
-ALTER TABLE budgyscheme.transaction
-    ADD CONSTRAINT FK_TRANSACTION_ON_CATEGORY FOREIGN KEY (category_id) REFERENCES budgyscheme.category (id);

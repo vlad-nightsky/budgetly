@@ -3,6 +3,7 @@ package tech.nightsky.budgetly.tbankTransaction.internal;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tech.nightsky.budgetly.core.parser.CsvParser;
 import tech.nightsky.budgetly.core.util.ParserUtil;
@@ -12,6 +13,7 @@ import tech.nightsky.budgetly.tbankTransaction.TbankTransactionSummary;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
 public class TbankTransactionServiceImpl implements TbankTransactionService {
     private final TbankTransactionRepository repository;
