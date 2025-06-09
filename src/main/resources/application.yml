@@ -1,11 +1,14 @@
 spring:
   application:
     name: budgetly
+  messages:
+    basename: "messages, config.i18n.messages"
+    common-messages: "classpath:messages_ru.properties"
+    fallback-to-system-locale: false
   jackson:
     property-naming-strategy: SNAKE_CASE
   flyway:
     locations: classpath:/db/migration
-    schemas: budgyscheme
     baselineOnMigrate: true
     enabled: true
   datasource:

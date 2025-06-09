@@ -25,6 +25,14 @@ public record CategoryResponse(
         String name,
 
         @Schema(
+                title = ToRefactoringDocs.CategoryResponse.Code.TITLE,
+                description = ToRefactoringDocs.CategoryResponse.Code.DESCRIPTION,
+                accessMode = Schema.AccessMode.READ_WRITE,
+                example = ToRefactoringDocs.CategoryResponse.Code.EXAMPLE
+        )
+        String code,
+
+        @Schema(
                 title = ToRefactoringDocs.CategoryResponse.Account.TITLE,
                 description = ToRefactoringDocs.CategoryResponse.Account.DESCRIPTION,
                 accessMode = Schema.AccessMode.READ_ONLY

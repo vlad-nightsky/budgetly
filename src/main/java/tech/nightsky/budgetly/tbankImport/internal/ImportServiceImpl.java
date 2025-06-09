@@ -1,6 +1,7 @@
 package tech.nightsky.budgetly.tbankImport.internal;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tech.nightsky.budgetly.tbankImport.ImportService;
 import tech.nightsky.budgetly.tbankImport.TbankImportSummary;
@@ -10,6 +11,7 @@ import tech.nightsky.budgetly.tbankTransaction.TbankTransactionSummary;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
 public class ImportServiceImpl implements ImportService {
     private final TbankImportRepository importRepository;

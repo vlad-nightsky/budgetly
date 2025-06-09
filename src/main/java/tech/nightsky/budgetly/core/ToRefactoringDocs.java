@@ -239,6 +239,12 @@ public class ToRefactoringDocs {
             public static final String EXAMPLE = "Продукты";
         }
 
+        public static final class Code {
+            public static final String TITLE = "Код категории";
+            public static final String DESCRIPTION = "Код категории помогает системе определять категорию при парсинге. Должно быть уникальным.";
+            public static final String EXAMPLE = "MARKET";
+        }
+
         public static final class Account {
             public static final String TITLE = "Информация об аккаунте пользователя";
             public static final String DESCRIPTION = "Информация об аккаунте пользователя.";

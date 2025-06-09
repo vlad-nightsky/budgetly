@@ -2,6 +2,7 @@ package tech.nightsky.budgetly.transaction.internal;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.account.AccountService;
 import tech.nightsky.budgetly.account.AccountSummary;
 import tech.nightsky.budgetly.category.CategoryService;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
  * Бизнес логика
  */
 @Slf4j
+@Service
 @RequiredArgsConstructor
 class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository repository;
