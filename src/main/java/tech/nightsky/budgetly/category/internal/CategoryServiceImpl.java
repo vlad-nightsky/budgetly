@@ -92,13 +92,19 @@ class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategorySummary> createDefaultCategories(AccountSummary account) {
-        return Category.defaultCategoriesBuilder()
-                .locale(Constant.RUSSIA)
-                .messageSource(messageSource)
-                .account(account)
-                .build()
+        return Category.categories(account)
                 .stream()
-                .filter(category -> !repository.existsByCodeAndAccountId(category.getCode(), category.getAccountId()))
+                .peek(category -> category.setName(
+                        messageSource.getMessage(
+                                (CategoryConst.MESSAGE_SOURCE_NAME + Constant.RUSSIA).toLowerCase(Constant.RUSSIA),
+                                null,
+                                Constant.RUSSIA
+                        )
+                ))
+                .filter(category -> !repository.existsByCodeAndAccountId(
+                        category.getCode(),
+                        category.getAccountId()
+                ))
                 .peek(repository::save)
                 .map(mapper::map)
                 .toList();

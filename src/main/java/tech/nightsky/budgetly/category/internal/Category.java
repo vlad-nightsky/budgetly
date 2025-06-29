@@ -74,13 +74,17 @@ class Category {
     @JoinColumn(name = "account_id", nullable = false)
     private Long accountId;
 
-    @Builder(builderMethodName = "defaultCategoriesBuilder", builderClassName = "DefaultCategoriesBuilder")
-    private static List<Category> categories(@NonNull MessageSource messageSource, @NonNull AccountSummary account, @NonNull Locale locale) {
+    /**
+     * Создаёт список категорий по умолчанию для указанного аккаунта.
+     *
+     * @param account объект AccountSummary, содержащий информацию об аккаунте пользователя
+     * @return список стандартных категорий, ассоциированных с указанным аккаунтом
+     */
+    public static List<Category> categories(@NonNull AccountSummary account) {
         return DEFAULT_CATEGORY_CODES.stream()
                 .map(code -> Category.builder()
                         .accountId(account.id())
                         .code(code)
-                        .name(messageSource.getMessage((CategoryConst.MESSAGE_SOURCE_NAME + code).toLowerCase(locale), null, locale))
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
                         .build())
