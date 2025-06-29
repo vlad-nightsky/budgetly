@@ -3,10 +3,14 @@ package tech.nightsky.budgetly.category.internal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.account.AccountService;
+import tech.nightsky.budgetly.account.AccountSummary;
 import tech.nightsky.budgetly.category.CategoryService;
 import tech.nightsky.budgetly.category.CategorySummary;
 import tech.nightsky.budgetly.category.api.CategoryRequest;
+import tech.nightsky.budgetly.core.Constant;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,11 +23,13 @@ import java.util.stream.Collectors;
  * Бизнес логика
  */
 @Slf4j
+@Service
 @RequiredArgsConstructor
 class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository repository;
     private final AccountService accountService;
     private final CategoryMapper mapper;
+    private final MessageSource messageSource;
 
     @Override
     public List<CategorySummary> getAllCategories() {
@@ -48,10 +54,16 @@ class CategoryServiceImpl implements CategoryService {
                 .updatedAt(LocalDateTime.now())
                 .build();
 
+        validateBeforeSave(newCategory);
         val savedCategory = repository.save(newCategory);
 
         log.info("Категория с идентификатором: {} сохранён успешно", newCategory.getId());
         return mapper.map(savedCategory);
+    }
+
+    private void validateBeforeSave(Category category) {
+        if (repository.existsByCodeAndAccountId(category.getCode(), category.getAccountId()))
+            throw new RuntimeException("Category code already exists");
     }
 
     @Override
@@ -76,5 +88,25 @@ class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategoryById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<CategorySummary> createDefaultCategories(AccountSummary account) {
+        return Category.categories(account)
+                .stream()
+                .peek(category -> category.setName(
+                        messageSource.getMessage(
+                                (CategoryConst.MESSAGE_SOURCE_NAME + Constant.RUSSIA).toLowerCase(Constant.RUSSIA),
+                                null,
+                                Constant.RUSSIA
+                        )
+                ))
+                .filter(category -> !repository.existsByCodeAndAccountId(
+                        category.getCode(),
+                        category.getAccountId()
+                ))
+                .peek(repository::save)
+                .map(mapper::map)
+                .toList();
     }
 }

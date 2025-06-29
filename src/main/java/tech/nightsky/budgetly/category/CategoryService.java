@@ -1,6 +1,6 @@
 package tech.nightsky.budgetly.category;
 
-import org.springframework.stereotype.Service;
+import tech.nightsky.budgetly.account.AccountSummary;
 import tech.nightsky.budgetly.category.api.CategoryRequest;
 
 import java.util.List;
@@ -11,7 +11,6 @@ import java.util.Optional;
  * <p>
  * Бизнес логика
  */
-@Service
 public interface CategoryService {
 
     List<CategorySummary> getAllCategories();
@@ -23,4 +22,13 @@ public interface CategoryService {
     CategorySummary updateCategory(Long id, CategoryRequest request);
 
     void deleteCategoryById(Long id);
+
+    /**
+     * Для указанного гостя создаёт список стандартных категорий.
+     * Игнорирует категорию, если категория со стандартным кодом уже создана.
+     *
+     * @param account аккаунт пользователя
+     * @return список только тех стандартных категорий, которые созданы.
+     */
+    List<CategorySummary> createDefaultCategories(AccountSummary account);
 }

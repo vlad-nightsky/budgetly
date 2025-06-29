@@ -57,7 +57,7 @@ public class AccountController {
     @ApiResponse(responseCode = "201", description = ToRefactoringDocs.AccountController.Save.SUCCESS_MESSAGE,
             headers = {@Header(name = "Location", ref = "#/components/headers/Location")})
     public ResponseEntity<AccountResponse> saveAccount(@RequestBody AccountRequest request) {
-        val account = service.saveAccount(request);
+        val account = service.createAccount(request);
 
         val location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

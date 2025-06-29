@@ -31,7 +31,7 @@ public class CategoryController {
     private final CategoryService service;
     private final CategoryControllerMapper mapper;
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = ToRefactoringDocs.CategoryController.GetAll.SUMMARY, description = ToRefactoringDocs.CategoryController.GetAll.DESCRIPTION)
     @ApiResponse(responseCode = "200", description = ToRefactoringDocs.CategoryController.GetAll.MESSAGE)
     public ResponseEntity<List<CategoryResponse>> getAllCategories() {
