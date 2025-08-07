@@ -5,6 +5,7 @@ import lombok.val;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tech.nightsky.budgetly.category.CategorySummary;
 import tech.nightsky.budgetly.core.parser.CsvParser;
 import tech.nightsky.budgetly.core.util.ParserUtil;
 import tech.nightsky.budgetly.tbankTransaction.TbankTransactionService;
@@ -44,6 +45,13 @@ public class TbankTransactionServiceImpl implements TbankTransactionService {
         }
         repository.save(tbankTransaction);
         return true;
+    }
+
+    @Override
+    public CategorySummary findCategoryByTbankTransaction(TbankTransactionSummary transaction) {
+
+
+        return null;
     }
 
     private TbankTransaction parce(CSVRecord csvRecord) {
