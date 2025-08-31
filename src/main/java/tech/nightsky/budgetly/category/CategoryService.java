@@ -31,4 +31,6 @@ public interface CategoryService {
      * @return список только тех стандартных категорий, которые созданы.
      */
     List<CategorySummary> createDefaultCategories(AccountSummary account);
+
+    CategorySummary getCategoryByCodeAndAccountId(DefaultCategoryCodes categoryCode, Long accountId);
 }

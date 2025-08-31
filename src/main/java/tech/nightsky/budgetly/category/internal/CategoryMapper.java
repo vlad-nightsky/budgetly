@@ -6,7 +6,7 @@ import tech.nightsky.budgetly.category.api.CategoryResponse;
 
 @Mapper(componentModel = "spring")
 interface CategoryMapper {
-    CategorySummary map(Category category);
+    CategorySummary toSummary(Category category);
 
-    CategoryResponse map(CategorySummary categorySummary);
+    CategoryResponse toResponse(CategorySummary categorySummary);
 }

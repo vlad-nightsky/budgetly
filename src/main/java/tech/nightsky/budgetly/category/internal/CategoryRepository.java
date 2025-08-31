@@ -14,4 +14,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
      * @return true если категория существует, false в противном случае
      */
     boolean existsByCodeAndAccountId(String code, Long accountId);
+
+    Category getByCodeAndAccountId(String code, Long accountId);
 }

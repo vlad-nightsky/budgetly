@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @SuperBuilder
 @Table(name = "category", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-class Category {
+public class Category {
     /**
      * Идентификатор
      */

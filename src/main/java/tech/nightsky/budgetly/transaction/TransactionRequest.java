@@ -1,8 +1,8 @@
-package tech.nightsky.budgetly.transaction.api;
+package tech.nightsky.budgetly.transaction;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import tech.nightsky.budgetly.core.ToRefactoringDocs;
-import tech.nightsky.budgetly.transaction.TransactionType;
 
 import java.math.BigDecimal;
 
@@ -19,6 +19,7 @@ import java.math.BigDecimal;
         title = ToRefactoringDocs.TransactionRequest.TITLE,
         description = ToRefactoringDocs.TransactionRequest.DESCRIPTION
 )
+@Builder
 public record TransactionRequest(
         @Schema(
                 title = ToRefactoringDocs.TransactionRequest.Amount.TITLE,

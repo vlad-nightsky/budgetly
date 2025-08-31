@@ -5,7 +5,9 @@ import tech.nightsky.budgetly.tbankImport.ImportStatus;
 public record TbankImportResponse(
         Long id,
         Integer transactionCount,
-        Integer skipped,
-        Integer saved,
+        Long skipped,
+        Long saved,
+        Long parsed,
+        Long filtered,
         ImportStatus status) {
 }

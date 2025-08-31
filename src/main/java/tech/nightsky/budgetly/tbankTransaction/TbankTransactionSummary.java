@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public record TbankTransactionSummary(
         Long id,
-        Long tbankImportId,
+        Long importId,
         LocalDateTime operationDate,
         LocalDate paymentDate,
         String cardNumber,
@@ -25,6 +25,9 @@ public record TbankTransactionSummary(
         BigDecimal bonuses,
         BigDecimal investmentRounding,
         BigDecimal roundedOperationAmount,
-        Integer rowHash
+        Integer rowHash,
+        ParseResult parseResult,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }

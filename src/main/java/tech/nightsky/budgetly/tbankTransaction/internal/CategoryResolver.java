@@ -2,6 +2,7 @@ package tech.nightsky.budgetly.tbankTransaction.internal;
 
 import org.springframework.stereotype.Service;
 import tech.nightsky.budgetly.category.DefaultCategoryCodes;
+import tech.nightsky.budgetly.tbankTransaction.TbankTransactionSummary;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.Map;
 @Service
 public class CategoryResolver {
     private final Map<String, DefaultCategoryCodes> categoryHotMap = new HashMap<>();
+    private final Map<String, DefaultCategoryCodes> nameAndCategoryHotMap = new HashMap<>();
+
     //Карта сопоставления категории Транзакции Т-Банк
     {
         categoryHotMap.put("еда", DefaultCategoryCodes.FOOD);
@@ -37,7 +40,6 @@ public class CategoryResolver {
         categoryHotMap.put("медицина", DefaultCategoryCodes.HEALTH);
     }
 
-    private final Map<String, DefaultCategoryCodes> nameAndCategoryHotMap = new HashMap<>();
     //Карта сопоставления категории Транзакции Т-Банк и названия с категориями
     {
         categoryHotMap.put("самокаты в городе:развлечения", DefaultCategoryCodes.TRANSPORT);
@@ -53,4 +55,13 @@ public class CategoryResolver {
         categoryHotMap.put("нетмонет:сервис", DefaultCategoryCodes.FOOD);
     }
 
+    DefaultCategoryCodes findCategoryCodesBy(TbankTransactionSummary transaction) {
+        return nameAndCategoryHotMap.computeIfAbsent(
+                ResolverUtils.getDescriptionTypeKey(transaction),
+                k -> categoryHotMap.getOrDefault(
+                        ResolverUtils.getCategoryKey(transaction),
+                        DefaultCategoryCodes.OTHER
+                )
+        );
+    }
 }

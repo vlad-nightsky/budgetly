@@ -3,6 +3,7 @@ package tech.nightsky.budgetly.tbankTransaction.internal;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import tech.nightsky.budgetly.tbankTransaction.ParseResult;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Table(name = "tbankTransaction", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(exclude = {"id", "createdAt", "updatedAt", "tbankImportId", "rowHash"})
+@EqualsAndHashCode(exclude = {"id", "createdAt", "updatedAt", "importId", "rowHash", "parseResult"})
 class TbankTransaction {
     /**
      * Идентификатор
@@ -40,7 +41,7 @@ class TbankTransaction {
      * Идентификатор импорта
      */
     @JoinColumn(name = "import_id", nullable = false)
-    private Long tbankImportId;
+    private Long importId;
 
     /**
      * Дата и время операции
@@ -122,10 +123,33 @@ class TbankTransaction {
      */
     private Integer rowHash;
 
-    public TbankTransaction finishParse(Long tbankImportId) {
-        this.setTbankImportId(tbankImportId);
+    /**
+     * Результат парсинга транзакции
+     * <p>
+     * То есть результат перевода транзакции Т-Банк в системную транзакцию.
+     */
+    private ParseResult parseResult;
+
+    public TbankTransaction finishParse(Long importId) {
+        this.setImportId(importId);
         this.setRowHash(hashCode());
         this.setUpdatedAt(LocalDateTime.now());
         return this;
+    }
+
+    /**
+     * Переводит транзакцию в статус отфильтрован
+     */
+    public void filtered() {
+        this.updatedAt = LocalDateTime.now();
+        this.parseResult = ParseResult.FILTERED;
+    }
+
+    /**
+     * Переводит транзакцию в статус распарщен
+     */
+    public void parsed() {
+        this.updatedAt = LocalDateTime.now();
+        this.parseResult = ParseResult.PARSED;
     }
 }

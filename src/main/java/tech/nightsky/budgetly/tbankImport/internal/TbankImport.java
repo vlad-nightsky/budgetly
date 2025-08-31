@@ -42,16 +42,27 @@ class TbankImport {
      */
     private Integer transactionCount;
 
+    //TODO Можно статистику сделать картой status: count
     /**
      * Количество транзакций сохранённых в базу
      */
-    private Integer saved;
+    private Long saved;
 
     /**
      * Количество пропущенных транзакций.
      * Транзакции не сохранены потому что дубликаты
      */
-    private Integer skipped;
+    private Long skipped;
+
+    /**
+     * Количество транзакций успешно обработанных в системную транзакцию.
+     */
+    private Long parsed;
+
+    /**
+     * Количество транзакций которые отфильтрованные в связи с правилами фильтрации.
+     */
+    private Long filtered;
 
     /**
      * Статус импорта (SUCCESS/ERROR/STARTED)
@@ -68,13 +79,16 @@ class TbankImport {
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .transactionCount(0)
-                .skipped(0)
-                .saved(0)
+                .skipped(0L)
+                .saved(0L)
+                .filtered(0L)
+                .parsed(0L)
                 .status(ImportStatus.STARTED)
                 .build();
     }
 
-    public TbankImport setSuccess(Integer transactionCount, int skipped, int saved) {
+    //todo параметры long skipped, long saved, long parsed, long filtered можно сгруппировать в Record
+    public TbankImport setSuccess(Integer transactionCount, long skipped, long saved, long parsed, long filtered) {
         if (transactionCount == null || transactionCount <= 0) {
             throw new IllegalArgumentException("TransactionCount must be greater than 0");
         }
@@ -84,10 +98,18 @@ class TbankImport {
         if (saved < 0) {
             throw new IllegalArgumentException("Saved must be greater than 0");
         }
+        if (parsed < 0) {
+            throw new IllegalArgumentException("Parsed must be greater than 0");
+        }
+        if (filtered < 0) {
+            throw new IllegalArgumentException("Filtered must be greater than 0");
+        }
         this.setUpdatedAt(LocalDateTime.now());
         this.setTransactionCount(transactionCount);
         this.setSaved(saved);
         this.setSkipped(skipped);
+        this.setParsed(parsed);
+        this.setFiltered(filtered);
         this.setStatus(ImportStatus.SUCCESS);
         return this;
     }
