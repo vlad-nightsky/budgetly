@@ -18,33 +18,24 @@ import java.util.function.Function;
 
 @Slf4j
 public class CsvParser {
-    public static String TYPE = "text/csv";
-
-    public static boolean hasCsvFormat(MultipartFile file) {
-        if (!TYPE.equals(file.getContentType())) {
-            return false;
-        }
-        return true;
-    }
-
     @Builder
     public static Parser csvBuilder(@NonNull MultipartFile file, String delimiter) {
         final var _delimiter = StringUtils.hasText(delimiter) ? delimiter : ";";
-        try (
-                var csvParser = CSVParser.parse(
-                        file.getInputStream(),
-                        StandardCharsets.UTF_8,
-                        CSVFormat.DEFAULT
-                                .builder()
-                                .setHeader()
-                                .setSkipHeaderRecord(true)
-                                .setQuote('"')
-                                .setTrim(true)
-                                .setIgnoreEmptyLines(true)
-                                .setDelimiter(_delimiter)
-                                .get())
-        ) {
-            return Parser.of(csvParser.getRecords());
+        try {
+            try (var csvParser = CSVParser.parse(
+                    file.getInputStream(),
+                    StandardCharsets.UTF_8,
+                    CSVFormat.DEFAULT
+                            .builder()
+                            .setHeader()
+                            .setSkipHeaderRecord(true)
+                            .setQuote('"')
+                            .setTrim(true)
+                            .setIgnoreEmptyLines(true)
+                            .setDelimiter(_delimiter)
+                            .get())) {
+                return Parser.of(csvParser.getRecords());
+            }
         } catch (IOException e) {
             throw new RuntimeException("CSV data is failed to parse: " + e.getMessage());
         }

@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @SuperBuilder
-@Table(name = "tbankTransaction", schema = "budgyscheme")
+@Table(name = "tbank_transaction", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(exclude = {"id", "createdAt", "updatedAt", "importId", "rowHash", "parseResult"})
-class TbankTransaction {
+public class TbankTransaction {
     /**
      * Идентификатор
      */

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @SuperBuilder
-@Table(name = "tbankImport", schema = "budgyscheme")
+@Table(name = "tbank_import", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class TbankImport {
     /**
@@ -46,23 +46,23 @@ class TbankImport {
     /**
      * Количество транзакций сохранённых в базу
      */
-    private Long saved;
+    private Integer saved;
 
     /**
      * Количество пропущенных транзакций.
      * Транзакции не сохранены потому что дубликаты
      */
-    private Long skipped;
+    private Integer skipped;
 
     /**
      * Количество транзакций успешно обработанных в системную транзакцию.
      */
-    private Long parsed;
+    private Integer parsed;
 
     /**
      * Количество транзакций которые отфильтрованные в связи с правилами фильтрации.
      */
-    private Long filtered;
+    private Integer filtered;
 
     /**
      * Статус импорта (SUCCESS/ERROR/STARTED)
@@ -79,16 +79,16 @@ class TbankImport {
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .transactionCount(0)
-                .skipped(0L)
-                .saved(0L)
-                .filtered(0L)
-                .parsed(0L)
+                .skipped(0)
+                .saved(0)
+                .filtered(0)
+                .parsed(0)
                 .status(ImportStatus.STARTED)
                 .build();
     }
 
     //todo параметры long skipped, long saved, long parsed, long filtered можно сгруппировать в Record
-    public TbankImport setSuccess(Integer transactionCount, long skipped, long saved, long parsed, long filtered) {
+    public TbankImport setSuccess(Integer transactionCount, Integer skipped, Integer saved, Integer parsed, Integer filtered) {
         if (transactionCount == null || transactionCount <= 0) {
             throw new IllegalArgumentException("TransactionCount must be greater than 0");
         }
@@ -111,12 +111,6 @@ class TbankImport {
         this.setParsed(parsed);
         this.setFiltered(filtered);
         this.setStatus(ImportStatus.SUCCESS);
-        return this;
-    }
-
-    public TbankImport setError() {
-        this.setUpdatedAt(LocalDateTime.now());
-        this.setStatus(ImportStatus.ERROR);
         return this;
     }
 }

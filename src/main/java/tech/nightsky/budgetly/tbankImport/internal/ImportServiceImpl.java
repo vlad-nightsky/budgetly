@@ -15,7 +15,6 @@ import tech.nightsky.budgetly.transaction.TransactionSummary;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,19 +46,19 @@ public class ImportServiceImpl implements ImportService {
         List<TransactionSummary> newClearTransaction = newUniqueTransaction.stream()
                 .map(tbankTransaction -> {
                     if (tbankTransactionService.isFiltered(tbankTransaction)) {
-                        tbankTransaction = tbankTransactionService.setFiltered(tbankTransaction);
+                        tbankTransactionService.setFiltered(tbankTransaction);
                         return null;
                     } else {
                         TransactionRequest clearTransaction = tbankTransactionService.toTransaction(tbankTransaction, accountId);
                         TransactionSummary result = transactionService.saveTransaction(clearTransaction);
-                        tbankTransaction = tbankTransactionService.setParsed(tbankTransaction);
+                        tbankTransactionService.setParsed(tbankTransaction);
                         return result;
                     }
                 })
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-        final var parsed = newClearTransaction.stream().count();
-        final var filtered = newUniqueTransaction.stream().count() - parsed;
+                .toList();
+        final var parsed = newClearTransaction.size();
+        final var filtered = newUniqueTransaction.size() - parsed;
 
         tbankImport = importRepository.save(tbankImport.setSuccess(rowTransactions.size(), skipped, saved, parsed, filtered));
         return mapper.map(tbankImport);

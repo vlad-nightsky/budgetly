@@ -57,8 +57,7 @@ public class TbankTransactionServiceImpl implements TbankTransactionService {
     @Override
     public CategorySummary findCategoryByTbankTransaction(TbankTransactionSummary transaction, Long accountId) {
         final var categoryCode = categoryResolver.findCategoryCodesBy(transaction);
-        final var category = categoryService.getCategoryByCodeAndAccountId(categoryCode, accountId);
-        return category;
+        return categoryService.getCategoryByCodeAndAccountId(categoryCode, accountId);
     }
 
     @Override
@@ -83,19 +82,17 @@ public class TbankTransactionServiceImpl implements TbankTransactionService {
     }
 
     @Override
-    public TbankTransactionSummary setFiltered(TbankTransactionSummary tbankTransaction) {
+    public void setFiltered(TbankTransactionSummary tbankTransaction) {
         TbankTransaction transaction = mapper.toEntity(tbankTransaction);
         transaction.filtered();
         repository.save(transaction);
-        return mapper.toSummary(transaction);
     }
 
     @Override
-    public TbankTransactionSummary setParsed(TbankTransactionSummary tbankTransaction) {
+    public void setParsed(TbankTransactionSummary tbankTransaction) {
         TbankTransaction transaction = mapper.toEntity(tbankTransaction);
         transaction.parsed();
         repository.save(transaction);
-        return mapper.toSummary(transaction);
     }
 
     private TransactionType typeBy(TbankTransactionSummary tbankTransaction) {

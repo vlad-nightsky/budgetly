@@ -58,7 +58,7 @@ public class CategoryResolver {
     DefaultCategoryCodes findCategoryCodesBy(TbankTransactionSummary transaction) {
         return nameAndCategoryHotMap.computeIfAbsent(
                 ResolverUtils.getDescriptionTypeKey(transaction),
-                k -> categoryHotMap.getOrDefault(
+                _ -> categoryHotMap.getOrDefault(
                         ResolverUtils.getCategoryKey(transaction),
                         DefaultCategoryCodes.OTHER
                 )
