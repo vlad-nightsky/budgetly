@@ -18,7 +18,7 @@ public class CategoryResolver {
         categoryHotMap.put("фастфуд", DefaultCategoryCodes.FOOD);
         categoryHotMap.put("супермаркеты", DefaultCategoryCodes.MARKET);
         categoryHotMap.put("дом", DefaultCategoryCodes.HOME);
-        categoryHotMap.put("досуг", DefaultCategoryCodes.LEISUR);
+        categoryHotMap.put("досуг", DefaultCategoryCodes.FUN);
         categoryHotMap.put("здоровье", DefaultCategoryCodes.HEALTH);
         categoryHotMap.put("подписка", DefaultCategoryCodes.SUBSCRIPTIONS);
         categoryHotMap.put("жкх", DefaultCategoryCodes.UTILITIES);
@@ -29,12 +29,12 @@ public class CategoryResolver {
         categoryHotMap.put("транспорт", DefaultCategoryCodes.TRANSPORT);
         categoryHotMap.put("такси", DefaultCategoryCodes.TRANSPORT);
         categoryHotMap.put("одежда и обувь", DefaultCategoryCodes.TRANSPORT);
-        categoryHotMap.put("развлечения", DefaultCategoryCodes.LEISUR);
+        categoryHotMap.put("развлечения", DefaultCategoryCodes.FUN);
         categoryHotMap.put("переводы", DefaultCategoryCodes.OTHER);
         categoryHotMap.put("дом и ремонт", DefaultCategoryCodes.HOME);
         categoryHotMap.put("рестораны", DefaultCategoryCodes.FOOD);
         categoryHotMap.put("мобильная связь", DefaultCategoryCodes.UTILITIES);
-        categoryHotMap.put("спорттовары", DefaultCategoryCodes.LEISUR);
+        categoryHotMap.put("спорттовары", DefaultCategoryCodes.FUN);
         categoryHotMap.put("ж/д билеты", DefaultCategoryCodes.TOURISM);
         categoryHotMap.put("местный транспорт", DefaultCategoryCodes.TRANSPORT);
         categoryHotMap.put("медицина", DefaultCategoryCodes.HEALTH);

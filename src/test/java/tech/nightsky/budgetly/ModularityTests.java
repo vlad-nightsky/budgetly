@@ -5,17 +5,16 @@ import org.springframework.modulith.core.ApplicationModules;
 import org.springframework.modulith.docs.Documenter;
 
 public class ModularityTests {
+
+    static ApplicationModules modules =  ApplicationModules.of(BudgetlyApplication.class);
+
     @Test
-    void verifyModularity() {
-        var modules = ApplicationModules.of(BudgetlyApplication.class);
-        modules.forEach(System.out::println);
-
-        var documenter = new Documenter(modules);
-
-        documenter
-                .writeModuleCanvases() // Показывать заголовки модулей
-                .writeDocumentation();
-
+    void verifyModularStructure() {
         modules.verify();
+    }
+
+    @Test
+    void createModulesDocumentation() {
+        new Documenter(modules).writeDocumentation();
     }
 }
