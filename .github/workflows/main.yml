@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Установка JDK
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      # 2. Кеш Gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # 3. Сборка + тесты
+      - name: Build with Gradle
+        run: ./gradlew clean build --info
+
+      # 4. Checkstyle + ReviewDog
+      - name: Run Checkstyle with reviewdog
+        run: |
+          ./gradlew checkstyleMain checkstyleTest
+          find . -name "checkstyle-result.xml" -exec cat {} \; \
+            | reviewdog -f=checkstyle -name="checkstyle" -reporter=github-pr-review
+
+      # 5. SpotBugs + ReviewDog
+      - name: Run SpotBugs with reviewdog
+        run: |
+          ./gradlew spotbugsMain spotbugsTest
+          find . -name "spotbugsXml.xml" -exec cat {} \; \
+            | reviewdog -f=checkstyle -name="spotbugs" -reporter=github-pr-review
+
+      # 6. Semgrep (анализ уязвимостей)
+      - name: Run Semgrep
+        run: |
+          pip install semgrep
+          semgrep --config=auto --error
+
+      # 7. Уведомления в Telegram
+      - name: Send Telegram notification
+        if: always()
+        uses: appleboy/telegram-action@v0.1.0
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ✅ CI finished for ${{ github.repository }}
+            📦 Commit: ${{ github.sha }}
+            👤 Author: ${{ github.actor }}
+            🔗 ${{ github.event.pull_request.html_url || github.event.head_commit.url }}
