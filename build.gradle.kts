@@ -48,6 +48,7 @@ dependencies {
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
     implementation("org.apache.commons:commons-csv:1.14.0")
+    testImplementation("org.testcontainers:postgresql:1.20.0")
 }
 dependencyManagement {
     imports {
