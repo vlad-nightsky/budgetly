@@ -42,7 +42,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
-            ✅ CI finished for ${{ github.repository }}
-            📦 Commit: ${{ github.sha }}
-            👤 Author: ${{ github.actor }}
+            ✅ Сборка завершена: ${{ github.repository }}
+            📦 Коммит: ${{ github.sha }}
+            👤 Автор: ${{ github.actor }}
             🔗 ${{ github.event.pull_request.html_url || github.event.head_commit.url }}
