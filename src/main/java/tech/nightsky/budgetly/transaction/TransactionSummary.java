@@ -1,6 +1,7 @@
 package tech.nightsky.budgetly.transaction;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public record TransactionSummary(
         Long id,
@@ -8,5 +9,8 @@ public record TransactionSummary(
         String description,
         TransactionType type,
         Long categoryId,
-        Long accountId) {
+        Long accountId,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
+) {
 }

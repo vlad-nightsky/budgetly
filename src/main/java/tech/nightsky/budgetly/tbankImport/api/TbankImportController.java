@@ -28,13 +28,13 @@ public class TbankImportController {
     @PostMapping(value = "/csv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = ToRefactoringDocs.ImportController.ImportCsv.SUMMARY, description = ToRefactoringDocs.ImportController.ImportCsv.DESCRIPTION)
     @ApiResponse(responseCode = "200", description = ToRefactoringDocs.ImportController.ImportCsv.MESSAGE)
-    public ResponseEntity<TbankImportResponse> importCSV(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<TbankImportResponse> importCSV(@RequestParam("file") MultipartFile file, @RequestParam("accountId") Long accountId) {
         // Проверка на пустой файл
         if (file.isEmpty()) {
             //todo вернуть корректную ошибку
             throw new RuntimeException("Please select a CSV file to upload");
         }
 
-        return ResponseEntity.ok().body(mapper.map(service.importCsv(file)));
+        return ResponseEntity.ok().body(mapper.map(service.importCsv(file, accountId)));
     }
 }

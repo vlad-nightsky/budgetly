@@ -1,7 +1,5 @@
 package tech.nightsky.budgetly.transaction;
 
-import tech.nightsky.budgetly.transaction.api.TransactionRequest;
-
 import java.util.List;
 import java.util.Optional;
 

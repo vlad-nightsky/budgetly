@@ -38,6 +38,6 @@ public class ParserUtil {
     }
 
     public static LocalDate parseDate(String date) {
-        return LocalDate.parse(date, DATE_TIME);
+        return LocalDate.parse(date, DATE);
     }
 }

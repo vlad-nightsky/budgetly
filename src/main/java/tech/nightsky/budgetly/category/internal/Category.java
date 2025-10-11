@@ -3,12 +3,11 @@ package tech.nightsky.budgetly.category.internal;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.context.MessageSource;
 import tech.nightsky.budgetly.account.AccountSummary;
+import tech.nightsky.budgetly.category.DefaultCategoryCodes;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -20,45 +19,31 @@ import java.util.stream.Collectors;
 @SuperBuilder
 @Table(name = "category", schema = "budgyscheme")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-class Category {
-    /**
-     * Список кодов для категорий.
-     * Содержит общие категории для системы.
-     */
-    public static final List<String> DEFAULT_CATEGORY_CODES = List.of(
-            "FOOD",          // Рестораны, кафе, фастфуд
-            "MARKET",        // Супермаркеты и магазины
-            "HOME",          // Дом, бытовая химия
-            "LEISURE",       // Кинотеатры, игры, путешествия
-            "HEALTH",        // Аптеки и врачи
-            "TRANSPORT",     // Транспорт и такси
-            "SUBSCRIPTIONS", // Разные подписочные сервисы
-            "UTILITIES",     // ЖКХ
-            "TOURISM",        // Туризм, охота и рыбалка
-            "GIFTS",         // Подарки
-            "PARTNER",       // Партнёр
-            "OTHER"          // То что не попало под другие категории
-    );
+public class Category {
     /**
      * Идентификатор
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+
     /**
      * Дата создания
      */
     protected LocalDateTime createdAt;
+
     /**
      * Дата последнего обновления
      */
     protected LocalDateTime updatedAt;
+
     /**
      * Название категории.
      * <p>
      * Обязательное поле
      */
     private String name;
+
     /**
      * Код категории.
      * <p>
@@ -66,6 +51,7 @@ class Category {
      * Позволяет системе понимать какая категория перед ним.
      */
     private String code;
+
     /**
      * Идентификатор аккаунта (связь Many-to-One).
      * <p>
@@ -81,7 +67,7 @@ class Category {
      * @return список стандартных категорий, ассоциированных с указанным аккаунтом
      */
     public static List<Category> categories(@NonNull AccountSummary account) {
-        return DEFAULT_CATEGORY_CODES.stream()
+        return DefaultCategoryCodes.getAllNames().stream()
                 .map(code -> Category.builder()
                         .accountId(account.id())
                         .code(code)

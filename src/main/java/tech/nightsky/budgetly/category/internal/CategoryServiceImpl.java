@@ -9,6 +9,7 @@ import tech.nightsky.budgetly.account.AccountService;
 import tech.nightsky.budgetly.account.AccountSummary;
 import tech.nightsky.budgetly.category.CategoryService;
 import tech.nightsky.budgetly.category.CategorySummary;
+import tech.nightsky.budgetly.category.DefaultCategoryCodes;
 import tech.nightsky.budgetly.category.api.CategoryRequest;
 import tech.nightsky.budgetly.core.Constant;
 
@@ -30,15 +31,16 @@ class CategoryServiceImpl implements CategoryService {
     private final AccountService accountService;
     private final CategoryMapper mapper;
     private final MessageSource messageSource;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public List<CategorySummary> getAllCategories() {
-        return repository.findAll().stream().map(mapper::map).collect(Collectors.toList());
+        return repository.findAll().stream().map(mapper::toSummary).collect(Collectors.toList());
     }
 
     @Override
     public Optional<CategorySummary> getCategoryById(Long id) {
-        return repository.findById(id).map(mapper::map);
+        return repository.findById(id).map(mapper::toSummary);
     }
 
     @Override
@@ -58,7 +60,7 @@ class CategoryServiceImpl implements CategoryService {
         val savedCategory = repository.save(newCategory);
 
         log.info("Категория с идентификатором: {} сохранён успешно", newCategory.getId());
-        return mapper.map(savedCategory);
+        return mapper.toSummary(savedCategory);
     }
 
     private void validateBeforeSave(Category category) {
@@ -82,7 +84,7 @@ class CategoryServiceImpl implements CategoryService {
         val updatedCategory = repository.save(existingCategory);
 
         log.info("Категория с идентификатором: {} обновлён успешно", updatedCategory.getId());
-        return mapper.map(updatedCategory);
+        return mapper.toSummary(updatedCategory);
     }
 
     @Override
@@ -106,7 +108,13 @@ class CategoryServiceImpl implements CategoryService {
                         category.getAccountId()
                 ))
                 .peek(repository::save)
-                .map(mapper::map)
+                .map(mapper::toSummary)
                 .toList();
+    }
+
+    @Override
+    public CategorySummary getCategoryByCodeAndAccountId(DefaultCategoryCodes categoryCode, Long accountId) {
+        Category category = categoryRepository.getByCodeAndAccountId(categoryCode.name(), accountId);
+        return mapper.toSummary(category);
     }
 }

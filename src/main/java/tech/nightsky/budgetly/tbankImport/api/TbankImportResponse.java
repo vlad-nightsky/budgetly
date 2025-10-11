@@ -7,5 +7,7 @@ public record TbankImportResponse(
         Integer transactionCount,
         Integer skipped,
         Integer saved,
+        Integer parsed,
+        Integer filtered,
         ImportStatus status) {
 }
