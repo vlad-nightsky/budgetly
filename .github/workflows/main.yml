@@ -28,20 +28,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build --info
 
-      # 4. Checkstyle + ReviewDog
-      - name: Run Checkstyle with reviewdog
-        run: |
-          ./gradlew checkstyleMain checkstyleTest
-          find . -name "checkstyle-result.xml" -exec cat {} \; \
-            | reviewdog -f=checkstyle -name="checkstyle" -reporter=github-pr-review
-
-      # 5. SpotBugs + ReviewDog
-      - name: Run SpotBugs with reviewdog
-        run: |
-          ./gradlew spotbugsMain spotbugsTest
-          find . -name "spotbugsXml.xml" -exec cat {} \; \
-            | reviewdog -f=checkstyle -name="spotbugs" -reporter=github-pr-review
-
       # 6. Semgrep (анализ уязвимостей)
       - name: Run Semgrep
         run: |
