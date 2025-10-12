@@ -8,8 +8,6 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 //todo нужно больше тестов
-//todo в gradle не запускаются тесты из за базы
-//todo загрузка контекста
 @SpringBootTest
 class BudgetlyApplicationTests {
 

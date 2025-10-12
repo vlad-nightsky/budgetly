@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Установка JDK
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 23
+
+      # Кеш Gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # Сборка + тесты
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      # Уведомления в Telegram
+      - name: Send Telegram notification
+        if: always()
+        uses: appleboy/telegram-action@v0.1.0
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ✅ Сборка завершена: ${{ github.repository }}
+            📦 Коммит: ${{ github.sha }}
+            👤 Автор: ${{ github.actor }}
+            🔗 ${{ github.event.pull_request.html_url || github.event.head_commit.url }}
