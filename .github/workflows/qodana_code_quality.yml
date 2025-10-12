@@ -5,8 +5,6 @@ on:
   push:
     branches: # Specify your branches here
       - main # The 'main' branch
-      - 'releases/*' # The release branches
-
 jobs:
   qodana:
     runs-on: ubuntu-latest
@@ -19,6 +17,13 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
           fetch-depth: 0  # a full history is required for pull request analysis
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 23
+
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.2
         with:
