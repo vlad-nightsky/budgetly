@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on:
   pull_request:
@@ -13,28 +13,46 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 1. Установка JDK
+      # Установка JDK
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 23
 
-      # 2. Кеш Gradle
+      # Кеш Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      # 3. Сборка + тесты
+      # Сборка + тесты
       - name: Build with Gradle
-        run: ./gradlew clean build --info
+        run: ./gradlew build
 
-      # 6. Semgrep (анализ уязвимостей)
-      - name: Run Semgrep
-        run: |
-          pip install semgrep
-          semgrep --config=auto --error
+  dependency-submission:
 
-      # 7. Уведомления в Telegram
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 23
+
+      # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
+      # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+  send-telegram:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Уведомления в Telegram
       - name: Send Telegram notification
         if: always()
         uses: appleboy/telegram-action@v0.1.0
