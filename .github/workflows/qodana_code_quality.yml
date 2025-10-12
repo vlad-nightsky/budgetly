@@ -18,15 +18,6 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
           fetch-depth: 0  # a full history is required for pull request analysis
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 23
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.2
         with:
