@@ -35,4 +35,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
             ✅ Анализ Qodana завершена: ${{ github.repository }} #${{ github.event.pull_request.number }}
-            🔗 Результаты анализа: https://qodana.cloud/project/5ZbxM/pr/${{ github.event.pull_request.number }}
+            🔗 Результаты анализа: https://qodana.cloud/project/5ZbxM
