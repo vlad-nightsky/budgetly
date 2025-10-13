@@ -4,7 +4,6 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     id ("org.springdoc.openapi-gradle-plugin") version "1.8.0"
 }
-val springModulithVersion by extra("1.3.5")
 
 group = "tech.nightsky"
 version = "0.1.0-SNAPSHOT"
@@ -58,7 +57,7 @@ dependencies {
 }
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.modulith:spring-modulith-bom:$springModulithVersion")
+        mavenBom("org.springframework.modulith:spring-modulith-bom:1.3.5")
     }
 }
 
