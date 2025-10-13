@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.4.5"
     id("io.spring.dependency-management") version "1.1.7"
+    id ("org.springdoc.openapi-gradle-plugin") version "1.8.0"
 }
 val springModulithVersion by extra("1.3.5")
 
@@ -12,6 +13,11 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(23)
     }
+}
+
+openApi {
+    outputFileName = "openapi.yaml"
+    outputDir = file("$rootDir/docs")
 }
 
 configurations {
