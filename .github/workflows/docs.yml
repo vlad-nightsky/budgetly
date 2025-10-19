@@ -41,20 +41,20 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: ⚙️ Соберём проект с тестам
-        run: ./gradlew clean tests
+        run: ./gradlew clean test
 
-      - name: Генерируем Swagger Docs
+      - name: ⚙️ Генерируем Swagger Docs
         run: ./gradlew generateOpenApiDocs
 
-      - name: Генерируем JavaDoc
+      - name: ⚙️ Генерируем JavaDoc
         run: ./gradlew javadoc
 
-      - name: Преобразуем документацию Modulith в Html
+      - name: ⚙️ Преобразуем документацию Modulith в Html
         run: ./gradlew convertModulithDocs
 
       # Часть доков сразу отправляется при генерации в папку docs
       # Но JavaDoc и файлы Gradle отправляю в ручную
-      - name: Копирую документацию
+      - name: 🗄️ Копирую документацию
         run: |
           mkdir -p docs/javadoc
           cp -r build/docs/javadoc docs/javadoc
@@ -63,14 +63,14 @@ jobs:
           mkdir -p docs/tests
           cp -r build/reports/tests/test docs/tests
 
-      - name: Настройка GitHub Pages
+      - name: 📑 Настройка GitHub Pages
         uses: actions/configure-pages@v4
 
-      - name: Загружаем страницы
+      - name: 📑 Загружаем страницы
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./docs
 
-      - name: Развёртываем GitHub Pages
+      - name: 📑 Развёртываем GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
