@@ -38,4 +38,7 @@ out/
 
 
 ### Project ###
-docs/openapi.yaml
+docs
+!docs/index.html
+!docs/swagger/index.html
+!docs/swagger/emoji-favicon.png

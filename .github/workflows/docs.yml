@@ -1,0 +1,76 @@
+# Этим действием мы собираем документацию.
+# Я беру всю доступную документацию и загружаю на
+# Pages проекта на GitHub.
+
+#Список документации:
+# - JavaDoc
+# - Gradle Test and Problems
+# - Modulith Scheme
+# - Swagger OpenApi
+
+name: Генерируем документацию
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🪞 Клонировать репозиторий
+        uses: actions/checkout@v4
+
+      - name: ☕ Настроем Java 23
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 23
+
+      - name: 🐘 Настроем Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: ⚙️ Соберём проект с тестам
+        run: ./gradlew clean tests
+
+      - name: Генерируем Swagger Docs
+        run: ./gradlew generateOpenApiDocs
+
+      - name: Генерируем JavaDoc
+        run: ./gradlew javadoc
+
+      - name: Преобразуем документацию Modulith в Html
+        run: ./gradlew convertModulithDocs
+
+      # Часть доков сразу отправляется при генерации в папку docs
+      # Но JavaDoc и файлы Gradle отправляю в ручную
+      - name: Копирую документацию
+        run: |
+          mkdir -p docs/javadoc
+          cp -r build/docs/javadoc docs/javadoc
+          mkdir -p docs/problems
+          cp -r build/reports/problems docs/problems
+          mkdir -p docs/tests
+          cp -r build/reports/tests/test docs/tests
+
+      - name: Настройка GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Загружаем страницы
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs
+
+      - name: Развёртываем GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -12,7 +12,7 @@ import java.util.List;
  *
  * <p>Этот класс полезен для стандартизации формата ответов API при возникновении исключений или ошибок.</p>
  *
- * <p>Пример использования:
+ * <p>Пример использования:</p>
  * <pre>{@code
  * ErrorResponse errorResponse = new ErrorResponse(
  *     "ValidationError",
@@ -21,7 +21,6 @@ import java.util.List;
  *     List.of(new ErrorDetailResponse("email", "Email must be a valid format"))
  * );
  * }</pre>
- * </p>
  *
  * @param error   Общий тип ошибки (например, "ValidationError", "InternalServerError").
  * @param message Сообщение об ошибке, предназначенное для пользователя или разработчика.

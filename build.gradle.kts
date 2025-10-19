@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.4.5"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
+    id("org.asciidoctor.jvm.convert") version "4.0.2"
 }
 
 group = "tech.nightsky"
@@ -16,12 +17,46 @@ java {
 
 openApi {
     outputFileName = "openapi.yaml"
-    outputDir = file("$rootDir/docs")
+    outputDir = file("$rootDir/docs/swagger")
 }
 
 configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
+tasks.register<org.asciidoctor.gradle.jvm.AsciidoctorTask>("convertModulithDocs") {
+    description = "Конвертирует Spring Modulith adoc в HTML"
+    group = "documentation"
+
+    // где лежат твои AsciiDoc файлы
+    setSourceDir(file("build/spring-modulith-docs"))
+
+    // куда класть HTML
+    setOutputDir( file("docs/spring-modulith-docs"))
+
+    // настройки Asciidoctor
+    baseDirFollowsSourceFile()
+    options(
+        mapOf(
+            "doctype" to "book",
+            "backend" to "html5"
+        )
+    )
+    attributes(
+        mapOf(
+            "toc" to "left",
+            "icons" to "font",
+            "sectanchors" to true,
+            "source-highlighter" to "rouge",
+            "encoding" to "utf-8"
+        )
+    )
+    asciidoctorj{
+        modules {
+            diagram.use()
+        }
     }
 }
 

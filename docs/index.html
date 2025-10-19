@@ -1,20 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8"/>
-    <title>API Docs</title>
-    <link href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" rel="stylesheet"/>
+    <title>Budgetly Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="emoji-favicon.png" type="image/png">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #161b22;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+        }
+
+        header h1 {
+            color: #58a6ff;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+
+            /* Адаптивные колонки */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        a.section {
+            display: block;
+            text-decoration: none;
+            background: #1f6feb;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: transform 0.15s ease, background 0.2s;
+        }
+
+        a.section:hover {
+            background: #388bfd;
+            transform: translateY(-3px);
+        }
+
+        .section h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .section p {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: #f0f6fc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+    </style>
 </head>
 <body>
-<div id="swagger-ui"></div>
-<script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
-<script>
-    window.onload = () => {
-        SwaggerUIBundle({
-            url: "openapi.yaml",
-            dom_id: "#swagger-ui",
-        });
-    };
-</script>
+<header>
+    <h1>📚 Budgetly Documentation</h1>
+    <p>API · JavaDoc · Coverage · Architecture</p>
+</header>
+<main>
+    <a href="./swagger/" class="section">
+        <h2>🧩 Swagger UI</h2>
+        <p>Исследуй и тестируй Budgetly REST API интерактивно.</p>
+    </a>
+    <a href="./javadoc/" class="section">
+        <h2>☕ JavaDoc</h2>
+        <p>Документация исходного кода Java для бекенда Budgetly.</p>
+    </a>
+    <a href="./problems/" class="section">
+        <h2>🐞 Проблемы</h2>
+        <p>Выявленные проблемы во время сборки Gradle.</p>
+    </a>
+    <a href="./tests/" class="section">
+        <h2>🧪 Тесты</h2>
+        <p>Результаты тестов.</p>
+    </a>
+    <a href="./spring-modulith-docs/all-docs.html" class="section">
+        <h2>🏰 Архитектура</h2>
+        <p>Иллюстрация модульной архитектуры Modulith.</p>
+    </a>
+</main>
+<footer>
+    © 2025 Budgetly · vnightsky · Собрано при помощи GitHub Actions
+</footer>
 </body>
 </html>
