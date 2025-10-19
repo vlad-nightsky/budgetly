@@ -40,6 +40,12 @@ jobs:
       - name: 🐘 Настроем Gradle
         uses: gradle/actions/setup-gradle@v4
 
+        # Нужен для генерации PlantUml в png
+      - name: Установить Graphviz
+        run: |
+          sudo apt update
+          sudo apt install -y graphviz
+
       - name: ⚙️ Соберём проект с тестам
         run: ./gradlew clean test
 
@@ -57,11 +63,10 @@ jobs:
       - name: 🗄️ Копирую документацию
         run: |
           mkdir -p docs/javadoc
-          cp -r build/docs/javadoc docs/javadoc
+          cp -r build/docs/javadoc docs
           mkdir -p docs/problems
-          cp -r build/reports/problems docs/problems
-          mkdir -p docs/tests
-          cp -r build/reports/tests/test docs/tests
+          cp -r build/reports/problems/problems-report.html docs/problems/index.html
+          cp -r build/reports/tests/test docs
 
       - name: 📑 Настройка GitHub Pages
         uses: actions/configure-pages@v4
